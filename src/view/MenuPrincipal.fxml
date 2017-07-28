@@ -10,12 +10,12 @@
    <children>
       <ButtonBar buttonMinWidth="0.0" prefHeight="600.0" prefWidth="556.0">
          <buttons>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" text="Représentants">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="180.0" text="Représentants">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Clients">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Clients">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
