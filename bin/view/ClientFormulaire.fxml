@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ClientFormulaireController">
+   <children>
+      <TabPane layoutX="8.0" prefHeight="400.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Détails client">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane layoutX="131.0" layoutY="27.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="124.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="376.0" minWidth="10.0" prefWidth="376.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Numéro client" />
+                              <Label text="Enseigne" GridPane.rowIndex="1" />
+                              <Label text="Adresse" GridPane.rowIndex="2" />
+                              <Label text="Email" GridPane.rowIndex="3" />
+                              <Label text="Téléphone" GridPane.rowIndex="4" />
+                              <Label text="Siret" GridPane.rowIndex="5" />
+                              <Label text="Numéro représentant" GridPane.rowIndex="6" />
+                              <Label text="Commande numéro" GridPane.rowIndex="7" />
+                              <TextField fx:id="numClientField" GridPane.columnIndex="1" />
+                              <TextField fx:id="enseigneField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="adresseField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="telField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="siretField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <TextField fx:id="numRepField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <TextField fx:id="numComField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                           </children>
+                        </GridPane>
+                        <ButtonBar layoutX="300.0" layoutY="322.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0">
+                          <buttons>
+                            <Button mnemonicParsing="false" onAction="#handleOk" text="OK" />
+                              <Button mnemonicParsing="false" onAction="#handleCancel" text="Annuler" />
+                          </buttons>
+                        </ButtonBar>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
