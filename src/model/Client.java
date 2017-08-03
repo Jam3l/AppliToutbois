@@ -7,6 +7,7 @@ import javafx.beans.property.StringProperty;
 
 public class Client {
 	
+	private String numCli;
 	private final StringProperty numClient;
 	private final StringProperty enseigne;
 	private final StringProperty adresse;
@@ -15,24 +16,24 @@ public class Client {
 	private final StringProperty siret;
 	private final StringProperty numRep; 
 	private final IntegerProperty numCom;
+	private static int clientCompteur;
 	
-	
-
 	public Client() {
-		this(null,null, null);
-	}
-	public Client(String numClient, String enseigne, String adresse) {
-		this.numClient = new SimpleStringProperty(numClient);
-		this.enseigne = new SimpleStringProperty(enseigne);
-		this.adresse = new SimpleStringProperty(adresse);
+		clientCompteur ++;
+		String numCompteur = Integer.toString(clientCompteur);
+		numCli = "C" + numCompteur;
+		this.numClient = new SimpleStringProperty(numCli);
+		this.enseigne = new SimpleStringProperty();
+		this.adresse = new SimpleStringProperty();
 		this.email = new SimpleStringProperty();
 		this.tel = new SimpleStringProperty();
 		this.siret = new SimpleStringProperty();
 		this.numRep = new SimpleStringProperty();
 		this.numCom = new SimpleIntegerProperty();
 	}
+	
 	public String getNumClient() {return numClient.get();}
-    public void setNumClient(String numClient) {this.numClient.set(numClient);}            
+	public void setNumClient(String numClient) {this.numClient.set(numClient);}            
 	public StringProperty numClientProperty() {return numClient;}
 	
 	public String getEnseigne() {return enseigne.get();}

@@ -6,17 +6,21 @@ import main.MainApp;
 public class MenuPrincipaleController {
 private MainApp mainApp;
 	
-	public MenuPrincipaleController() {
-    }
 	@FXML
 	public void handleClient(){
 		mainApp.showMenuClient();
 	}
+	/*
+	@FXML
+	public void handleRep(){
+		mainApp.showMenuRep();
+	} 
+	@FXML
+	public void handlePros(){
+		mainApp.showMenuPros();
+	}
+	 */
 	public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-	}
-	@FXML
-	public void initialize(){
-		
 	}
 }

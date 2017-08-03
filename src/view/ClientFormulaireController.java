@@ -80,7 +80,6 @@ public class ClientFormulaireController {
 	    @FXML
 	    private void handleOk() {
 	        if (isInputValid()) {
-	            client.setNumClient(numClientField.getText());
 	            client.setEnseigne(enseigneField.getText());
 	            client.setAdresse(adresseField.getText());
 	            client.setEmail(emailField.getText());

@@ -26,8 +26,8 @@ import view.MenuPrincipaleController;
 	    private ObservableList<Client> clientData = FXCollections.observableArrayList();
 	    
 	    public MainApp() {
-	    	clientData.add(new Client("C235467", "Muster","12 rue du bois 59160 lomme"));
-	        clientData.add(new Client("C354673", "Muller","675 BV principale 59000 lille"));
+	    	//clientData.add(new Client("C235467", "Muster","12 rue du bois 59160 lomme"));
+	        //clientData.add(new Client("C354673", "Muller","675 BV principale 59000 lille"));
 	    }
 	    public ObservableList<Client> getClientData() {
 	        return clientData;
