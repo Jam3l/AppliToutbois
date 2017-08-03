@@ -146,4 +146,8 @@ public class ClientOverviewController {
             alert.showAndWait();
         }
     }
+    @FXML
+	public void handleMenu(){
+		mainApp.showMenuPrincipale();
+	}
 }

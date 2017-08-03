@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import model.Client;
 import view.ClientFormulaireController;
 import view.ClientOverviewController;
+import view.MenuPrincipaleController;
 
 
 
@@ -37,7 +38,7 @@ import view.ClientOverviewController;
 	        this.primaryStage.setTitle("Toutbois");
 
 	        initRootLayout();
-	        showMenuPrincipal();
+	        showMenuPrincipale();
 	    }
 	    public void initRootLayout() {
 	        try {
@@ -54,7 +55,24 @@ import view.ClientOverviewController;
 	            e.printStackTrace();
 	        }
 	    }
-	    public void showMenuPrincipal() {
+	    public void showMenuPrincipale() {
+	        try {
+	            
+	            FXMLLoader loader = new FXMLLoader();
+	            loader.setLocation(MainApp.class.getResource("/view/MenuPrincipal.fxml"));
+	            HBox MenuPrincipal = (HBox) loader.load();
+
+	            
+	            rootLayout.setCenter(MenuPrincipal);
+	            MenuPrincipaleController controller = loader.getController();
+	            controller.setMainApp(this);
+	            
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    public void showMenuClient() {
 	        try {
 	            // Load person overview.
 	            FXMLLoader loader = new FXMLLoader();

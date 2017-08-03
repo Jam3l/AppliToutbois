@@ -132,7 +132,7 @@
                            <children>
                               <VBox alignment="TOP_CENTER" maxWidth="100.0" minWidth="100.0" prefHeight="298.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Menu">
+                                    <Button mnemonicParsing="false" onAction="#handleMenu" prefHeight="25.0" prefWidth="72.0" text="Menu">
                                        <VBox.margin>
                                           <Insets bottom="70.0" top="30.0" />
                                        </VBox.margin>
