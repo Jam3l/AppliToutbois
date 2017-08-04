@@ -80,6 +80,7 @@ public class ClientFormulaireController {
 	    @FXML
 	    private void handleOk() {
 	        if (isInputValid()) {
+	        	client.setNumClient(numClientField.getText());
 	            client.setEnseigne(enseigneField.getText());
 	            client.setAdresse(adresseField.getText());
 	            client.setEmail(emailField.getText());
@@ -98,6 +99,7 @@ public class ClientFormulaireController {
 	     */
 	    @FXML
 	    private void handleCancel() {
+	    	client.setClientCompteur(client.getClientCompteur()-1);
 	        dialogStage.close();
 	    }
 
@@ -108,10 +110,6 @@ public class ClientFormulaireController {
 	     */
 	    private boolean isInputValid() {
 	        String errorMessage = "";
-
-	        if (numClientField.getText() == null || numClientField.getText().length() == 0) {
-	            errorMessage += "Numéro client invalide !\n";
-	        }
 	        if (enseigneField.getText() == null || enseigneField.getText().length() == 0) {
 	            errorMessage += "Enseigne invalide!\n";
 	        }
@@ -137,7 +135,7 @@ public class ClientFormulaireController {
 	            try {
 	                Integer.parseInt(numComField.getText());
 	            } catch (NumberFormatException e) {
-	                errorMessage += "No valid postal code (must be an integer)!\n";
+	                errorMessage += "Nombres de commande incorrect!\n";
 	            }
 	        }
 	        if (errorMessage.length() == 0) {

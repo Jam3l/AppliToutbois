@@ -63,6 +63,16 @@ public class Client {
 	public int getNumCom() {return numCom.get();}
 	public void setNumCom(int numCom) {this.numCom.set(numCom);}
 	public IntegerProperty numComProperty() {return numCom;}
+
+	public int getClientCompteur() {
+		return clientCompteur;
+	}
+
+	public void setClientCompteur(int clientCompteur) {
+		Client.clientCompteur = clientCompteur;
+	}
+
+	
 	
 	
 	
