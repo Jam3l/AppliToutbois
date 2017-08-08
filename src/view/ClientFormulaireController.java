@@ -1,5 +1,7 @@
 package view;
 
+import java.util.regex.Pattern;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -102,7 +104,20 @@ public class ClientFormulaireController {
 	    	client.setClientCompteur(client.getClientCompteur()-1);
 	        dialogStage.close();
 	    }
-
+	    //teste l'email si correct
+	    public boolean isEmailValid(){
+	    	if(Pattern.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$",emailField.getText())){
+	    		return true;
+	    	}
+	    	else{return false;}
+	    }
+	    //teste le numéro de tél
+	    public boolean isTelValid(){
+	    	if(Pattern.matches("^([.0-9]+)+$",telField.getText())){
+	    		return true;
+	    	}
+	    	else{return false;}
+	    }
 	    /**
 	     * Validates the user input in the text fields.
 	     *
@@ -116,10 +131,10 @@ public class ClientFormulaireController {
 	        if (adresseField.getText() == null || adresseField.getText().length() == 0) {
 	            errorMessage += "Adresse invalide!\n";
 	        }
-	        if (emailField.getText() == null || emailField.getText().length() == 0) {
+	        if (emailField.getText() == null || emailField.getText().length() == 0 || isEmailValid() == false) {
 	            errorMessage += "Email invalide!\n";
 	        }
-	        if (telField.getText() == null || telField.getText().length() == 0) {
+	        if (telField.getText() == null || telField.getText().length() == 0 || isTelValid() == false) {
 	            errorMessage += "Téléphone invalide!\n";
 	        } 
 	        if (siretField.getText() == null || siretField.getText().length() == 0) {
