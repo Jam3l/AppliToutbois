@@ -8,6 +8,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Client;
+//import view.ClientOverviewController;
 
 public class ClientFormulaireController {
 	
@@ -30,7 +31,7 @@ public class ClientFormulaireController {
 	    private Stage dialogStage;
 	    private Client client;
 	    private boolean okClicked = false;
-
+	    
 	    /**
 	     * Initializes the controller class. This method is automatically called
 	     * after the fxml file has been loaded.
@@ -47,7 +48,6 @@ public class ClientFormulaireController {
 	    public void setDialogStage(Stage dialogStage) {
 	        this.dialogStage = dialogStage;
 	    }
-
 	    /**
 	     * Sets the person to be edited in the dialog.
 	     *
@@ -75,10 +75,7 @@ public class ClientFormulaireController {
 	    public boolean isOkClicked() {
 	        return okClicked;
 	    }
-
-	    /**
-	     * Called when the user clicks ok.
-	     */
+	    //action bouton OK
 	    @FXML
 	    private void handleOk() {
 	        if (isInputValid()) {
@@ -95,13 +92,12 @@ public class ClientFormulaireController {
 	            dialogStage.close();
 	        }
 	    }
-
-	    /**
-	     * Called when the user clicks cancel.
-	     */
+	    //action bouton annuler
 	    @FXML
 	    private void handleCancel() {
-	    	client.setClientCompteur(client.getClientCompteur()-1);
+	    	if(ClientOverviewController.isPresser() == true){
+	    		client.setClientCompteur(client.getClientCompteur()-1);
+	    	}
 	        dialogStage.close();
 	    }
 	    //teste l'email si correct
@@ -118,11 +114,32 @@ public class ClientFormulaireController {
 	    	}
 	    	else{return false;}
 	    }
-	    /**
-	     * Validates the user input in the text fields.
-	     *
-	     * @return true if the input is valid
-	     */
+	    //teste si il y a bien 10 chiffres
+	    public boolean nbTelValid(){
+	    	int i,j,valid = 0;
+	    	char[] nbTel,j3;
+		    String j2="0123456789";
+	    	nbTel = telField.getText().toCharArray();
+	    	j3 = j2.toCharArray();
+	    	for(j=0;j<10;j++){
+	    		i = 0;
+	    		for(i=0; i<telField.getText().length(); i++){
+					if(nbTel[i] == j3[j]){
+						valid = valid + 1;
+					}	
+				}
+	    	}
+			if(valid == 10){
+				return true;
+			}else{return false;}	
+	    }
+	    public boolean isSiretValid(){
+	    	if(Pattern.matches("^([0-9]+)+$",siretField.getText())){
+	    		return true;
+	    	}
+	    	else{return false;}
+	    } 
+	    //vérifie si les champs sont valide
 	    private boolean isInputValid() {
 	        String errorMessage = "";
 	        if (enseigneField.getText() == null || enseigneField.getText().length() == 0) {
@@ -134,10 +151,10 @@ public class ClientFormulaireController {
 	        if (emailField.getText() == null || emailField.getText().length() == 0 || isEmailValid() == false) {
 	            errorMessage += "Email invalide!\n";
 	        }
-	        if (telField.getText() == null || telField.getText().length() == 0 || isTelValid() == false) {
-	            errorMessage += "Téléphone invalide!\n";
+	        if (telField.getText() == null || telField.getText().length() == 0 || isTelValid() == false || nbTelValid() == false) {
+	            errorMessage += "Téléphone invalide!\n" ;
 	        } 
-	        if (siretField.getText() == null || siretField.getText().length() == 0) {
+	        if (siretField.getText() == null || siretField.getText().length() != 14 || isSiretValid() == false) {
 	            errorMessage += "Siret invalide!\n";
 	        }
 	        if (numRepField.getText() == null || numRepField.getText().length() == 0) {
@@ -162,9 +179,7 @@ public class ClientFormulaireController {
 	            alert.setTitle("Champ invalide");
 	            alert.setHeaderText("Veuillez remplir correctement les champs");
 	            alert.setContentText(errorMessage);
-
 	            alert.showAndWait();
-
 	            return false;
 	        }
 	    }

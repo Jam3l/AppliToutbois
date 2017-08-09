@@ -18,7 +18,6 @@ public class ClientOverviewController {
 	private TableColumn<Client,String>enseigneColumn;
 	@FXML
 	private TableColumn<Client,String>adresseColumn;
-	
 	@FXML
 	private Label numClientLabel;
 	@FXML
@@ -36,15 +35,13 @@ public class ClientOverviewController {
 	@FXML
 	private Label numComLabel;
 	private MainApp mainApp;
-
+	public static boolean presser;
     /**
      * The constructor.
      * The constructor is called before the initialize() method.
      */
     public ClientOverviewController() {
     }
-
-
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -53,15 +50,12 @@ public class ClientOverviewController {
     private void initialize() {
         numClientColumn.setCellValueFactory(cellData -> cellData.getValue().numClientProperty());
         enseigneColumn.setCellValueFactory(cellData -> cellData.getValue().enseigneProperty());
-        adresseColumn.setCellValueFactory(cellData -> cellData.getValue().adresseProperty());
-        
+        adresseColumn.setCellValueFactory(cellData -> cellData.getValue().adresseProperty());      
         showClientDetails(null);
-
         // Listen for selection changes and show the person details when changed.
         clientTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showClientDetails(newValue));
     }
-
     /**
      * Is called by the main application to give a reference back to itself.
      * 
@@ -69,7 +63,6 @@ public class ClientOverviewController {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-
         // Add observable list data to the table
         clientTable.setItems(mainApp.getClientData());
     }
@@ -95,8 +88,7 @@ public class ClientOverviewController {
             numRepLabel.setText("");
             numComLabel.setText("");
         }
-    }
-    
+    }  
     @FXML
     private void handleDeleteClient() {
         int selectedIndex = clientTable.getSelectionModel().getSelectedIndex();
@@ -109,19 +101,18 @@ public class ClientOverviewController {
             alert.setTitle("Aucune séléction");
             alert.setHeaderText("Client non sélectionné");
             alert.setContentText("Veuillez séléctionner un client.");
-
             alert.showAndWait();
         }
     }
     @FXML
     private void handleNewClient() {
         Client tempClient = new Client();
+        presser = true;
         boolean okClicked = mainApp.showClientFormulaire(tempClient);
         if (okClicked) {
             mainApp.getClientData().add(tempClient);
         }
     }
-
     /**
      * Called when the user clicks the edit button. Opens a dialog to edit
      * details for the selected person.
@@ -129,12 +120,12 @@ public class ClientOverviewController {
     @FXML
     private void handleEditPerson() {
         Client selectedPerson = clientTable.getSelectionModel().getSelectedItem();
+        presser = false;
         if (selectedPerson != null) {
             boolean okClicked = mainApp.showClientFormulaire(selectedPerson);
             if (okClicked) {
                 showClientDetails(selectedPerson);
             }
-
         } else {
             // Nothing selected.
             Alert alert = new Alert(AlertType.WARNING);
@@ -142,12 +133,14 @@ public class ClientOverviewController {
             alert.setTitle("Pas de sélection");
             alert.setHeaderText("Aucun client sélectionner");
             alert.setContentText("Veuillez sélectionner un client.");
-
             alert.showAndWait();
         }
     }
     @FXML
 	public void handleMenu(){
 		mainApp.showMenuPrincipale();
+	}
+	public static boolean isPresser() {
+		return presser;
 	}
 }
