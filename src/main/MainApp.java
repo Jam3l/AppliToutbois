@@ -158,12 +158,10 @@ import view.RootLayoutController;
 	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
 	        if (file != null) {
 	            prefs.put("filePath", file.getPath());
-
 	            // Update the stage title.
 	            primaryStage.setTitle("Toutbois - " + file.getName());
 	        } else {
 	            prefs.remove("filePath");
-
 	            // Update the stage title.
 	            primaryStage.setTitle("Toutbois");
 	        }

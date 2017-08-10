@@ -6,6 +6,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -134,7 +135,17 @@
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#handleMenu" prefHeight="25.0" prefWidth="72.0" text="Menu">
                                        <VBox.margin>
-                                          <Insets bottom="70.0" top="30.0" />
+                                          <Insets bottom="40.0" top="20.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                    <TextField fx:id="EnseigneRField" alignment="CENTER" promptText="Enseigne">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="5.0" right="5.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Button mnemonicParsing="false" onAction="#handleRechercheClient" prefHeight="25.0" prefWidth="72.0" text="Rechercher">
+                                       <VBox.margin>
+                                          <Insets bottom="25.0" />
                                        </VBox.margin>
                                     </Button>
                                     <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleNewClient" prefHeight="25.0" prefWidth="72.0" text="Ajouter">

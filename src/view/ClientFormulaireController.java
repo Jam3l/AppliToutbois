@@ -1,17 +1,14 @@
 package view;
 
 import java.util.regex.Pattern;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Client;
-//import view.ClientOverviewController;
 
-public class ClientFormulaireController {
-	
+public class ClientFormulaireController {	
 	    @FXML
 	    private TextField numClientField;
 	    @FXML
@@ -30,8 +27,7 @@ public class ClientFormulaireController {
 	    private TextField numComField;
 	    private Stage dialogStage;
 	    private Client client;
-	    private boolean okClicked = false;
-	    
+	    private boolean okClicked = false;    
 	    /**
 	     * Initializes the controller class. This method is automatically called
 	     * after the fxml file has been loaded.
@@ -39,7 +35,6 @@ public class ClientFormulaireController {
 	    @FXML
 	    private void initialize() {
 	    }
-
 	    /**
 	     * Sets the stage of this dialog.
 	     *
@@ -59,7 +54,6 @@ public class ClientFormulaireController {
 	     */
 	    public void setClient(Client client) {
 	        this.client = client;
-
 	        numClientField.setText(client.getNumClient());
 	        enseigneField.setText(client.getEnseigne());
 	        adresseField.setText(client.getAdresse());
@@ -67,10 +61,8 @@ public class ClientFormulaireController {
 	        telField.setText(client.getTel());
 	        siretField.setText(client.getSiret());
 	        numRepField.setText(client.getNumRep());
-	        numComField.setText(Integer.toString(client.getNumCom()));
-	        
+	        numComField.setText(Integer.toString(client.getNumCom()));  
 	    }
-
 	    /**
 	     * Returns true if the user clicked OK, false otherwise.
 	     *
@@ -91,7 +83,6 @@ public class ClientFormulaireController {
 	            client.setSiret(siretField.getText());
 	            client.setNumRep(numRepField.getText());
 	            client.setNumCom(Integer.parseInt(numComField.getText()));
-	            
 	            okClicked = true;
 	            dialogStage.close();
 	        }

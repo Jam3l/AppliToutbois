@@ -6,6 +6,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
+import javafx.scene.control.TextField;
 import main.MainApp;
 import model.Client;
 
@@ -34,6 +36,8 @@ public class ClientOverviewController {
 	private Label numRepLabel;
 	@FXML
 	private Label numComLabel;
+	@FXML
+	private TextField EnseigneRField;
 	private MainApp mainApp;
 	public static boolean presser;
     /**
@@ -88,7 +92,16 @@ public class ClientOverviewController {
             numRepLabel.setText("");
             numComLabel.setText("");
         }
-    }  
+    }
+    @FXML
+    private void handleRechercheClient(){
+    	String enseigneR = EnseigneRField.getText();
+    	for(int i = 0;i < mainApp.getClientData().size();i++)
+    		if(mainApp.getClientData().get(i).getEnseigne().toLowerCase().equals(enseigneR.toLowerCase())){
+    			showClientDetails(mainApp.getClientData().get(i));
+    			i = mainApp.getClientData().size();
+    		}
+    }
     @FXML
     private void handleDeleteClient() {
         int selectedIndex = clientTable.getSelectionModel().getSelectedIndex();
