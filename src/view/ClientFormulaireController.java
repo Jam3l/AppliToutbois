@@ -47,6 +47,10 @@ public class ClientFormulaireController {
 	     */
 	    public void setDialogStage(Stage dialogStage) {
 	        this.dialogStage = dialogStage;
+	        //decompte le numero de client qui a été créer si l'on ferme la fenetre
+	        dialogStage.setOnCloseRequest( event -> {if(ClientOverviewController.isPresser() == true){
+	    		client.setClientCompteur(client.getClientCompteur()-1);
+	    	}});
 	    }
 	    /**
 	     * Sets the person to be edited in the dialog.

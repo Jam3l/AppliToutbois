@@ -78,6 +78,7 @@ import view.RootLayoutController;
 
 	            
 	            rootLayout.setCenter(MenuPrincipal);
+	            //rootLayout.hide();
 	            MenuPrincipaleController controller = loader.getController();
 	            controller.setMainApp(this);
 	            
@@ -130,12 +131,12 @@ import view.RootLayoutController;
 
 	            // Afficher la boîte de dialogue et attendre que l'utilisateur la ferme
 	            dialogStage.showAndWait();
-
 	            return controller.isOkClicked();
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	            return false;
 	        }
+	         
 	}
 	    public File getClientFilePath() {
 	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
