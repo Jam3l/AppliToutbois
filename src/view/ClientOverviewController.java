@@ -17,7 +17,7 @@ public class ClientOverviewController {		//test merge 2
 	@FXML
 	private TableColumn<Client,String>numClientColumn; // test 2 mika
 	@FXML
-	private TableColumn<Client,String>enseigneColumn; // comm
+	private TableColumn<Client,String>enseigneColumn; // commgit 
 	@FXML
 	private TableColumn<Client,String>adresseColumn;
 	@FXML
