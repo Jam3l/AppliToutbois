@@ -13,7 +13,7 @@ import model.Client;
 
 public class ClientOverviewController {
 	@FXML
-	private TableView<Client>clientTable;
+	private TableView<Client>clientTable; 	//Jamel Test Merge
 	@FXML
 	private TableColumn<Client,String>numClientColumn;
 	@FXML
