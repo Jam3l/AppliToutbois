@@ -15,7 +15,7 @@ public class ClientOverviewController {
 	@FXML
 	private TableView<Client>clientTable; 	//Jamel Test Merge + test mika
 	@FXML
-	private TableColumn<Client,String>numClientColumn;
+	private TableColumn<Client,String>numClientColumn; // test 2 mika
 	@FXML
 	private TableColumn<Client,String>enseigneColumn;
 	@FXML
