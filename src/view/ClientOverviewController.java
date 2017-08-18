@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import main.MainApp;
 import model.Client;
 
-public class ClientOverviewController {
+public class ClientOverviewController {		//test merge 2
 	@FXML
 	private TableView<Client>clientTable; 	//Jamel Test Merge + test mika
 	@FXML
