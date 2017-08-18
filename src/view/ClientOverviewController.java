@@ -17,7 +17,7 @@ public class ClientOverviewController {
 	@FXML
 	private TableColumn<Client,String>numClientColumn; // test 2 mika
 	@FXML
-	private TableColumn<Client,String>enseigneColumn;
+	private TableColumn<Client,String>enseigneColumn; // comm
 	@FXML
 	private TableColumn<Client,String>adresseColumn;
 	@FXML
