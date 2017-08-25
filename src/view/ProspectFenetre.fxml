@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ProspectOverviewController">
    <children>
       <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -38,14 +38,14 @@
                                     <Label text="Date de visite :" />
                                     <Label text="Adresse :" GridPane.rowIndex="2" />
                                     <Label text="N° Représentant :" GridPane.rowIndex="3" />
-                                    <Label text="Label" GridPane.columnIndex="1" />
-                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label fx:id="dateVisiteLabel" text="Label" GridPane.columnIndex="1" />
+                                    <Label fx:id="enseigneProspectLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label fx:id="numRepProspectLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <Label text="Enseigne :" GridPane.rowIndex="1" />
-                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label fx:id="adressePropectLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
-                              <Label layoutX="310.0" layoutY="14.0" text="Propect">
+                              <Label layoutX="310.0" layoutY="14.0" text="Prospect">
                                  <font>
                                     <Font name="System Bold" size="32.0" />
                                  </font>
@@ -56,22 +56,22 @@
                            <children>
                               <VBox alignment="TOP_CENTER" maxWidth="100.0" minWidth="100.0" prefHeight="298.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Menu">
+                                    <Button mnemonicParsing="false" onAction="#handleMenu" prefHeight="25.0" prefWidth="72.0" text="Menu">
                                        <VBox.margin>
                                           <Insets top="20.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Ajouter">
+                                    <Button mnemonicParsing="false" onAction="#handleNewProspect" prefHeight="25.0" prefWidth="72.0" text="Ajouter">
                                        <VBox.margin>
                                           <Insets top="50.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Modifier">
+                                    <Button mnemonicParsing="false" onAction="#handleEditProspect" prefHeight="25.0" prefWidth="72.0" text="Modifier">
                                        <VBox.margin>
                                           <Insets top="25.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Supprimer">
+                                    <Button mnemonicParsing="false" onAction="#handleDeleteProspect" prefHeight="25.0" prefWidth="72.0" text="Supprimer">
                                        <VBox.margin>
                                           <Insets top="25.0" />
                                        </VBox.margin>
@@ -86,11 +86,11 @@
             </AnchorPane>
           <AnchorPane minHeight="150.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView prefHeight="292.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="prospectTable" prefHeight="292.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn maxWidth="200.0" minWidth="150.0" prefWidth="100.0" text="Date de visite" />
-                      <TableColumn maxWidth="200.0" minWidth="100.0" prefWidth="102.0" text="N° Représentant" />
-                        <TableColumn minWidth="200.0" prefWidth="572.0" text="Enseigne" />
+                      <TableColumn fx:id="dateVisiteColumn" maxWidth="200.0" minWidth="150.0" prefWidth="100.0" text="Date de visite" />
+                      <TableColumn fx:id="numRepProspectColumn" maxWidth="200.0" minWidth="100.0" prefWidth="102.0" text="N° Représentant" />
+                        <TableColumn fx:id="enseignePropectColumn" minWidth="200.0" prefWidth="572.0" text="Enseigne" />
                     </columns>
                   </TableView>
                </children>

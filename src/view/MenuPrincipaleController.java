@@ -14,12 +14,12 @@ private MainApp mainApp;
 	@FXML
 	public void handleRep(){
 		mainApp.showMenuRep();
-	} 
+	} */
 	@FXML
 	public void handlePros(){
-		mainApp.showMenuPros();
+		mainApp.showMenuProspect();
 	}
-	 */
+	 
 	public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
 	}

@@ -27,7 +27,8 @@ public class ClientFormulaireController {
 	    private TextField numComField;
 	    private Stage dialogStage;
 	    private Client client;
-	    private boolean okClicked = false;    
+	    private boolean okClicked = false;
+	    
 	    /**
 	     * Initializes the controller class. This method is automatically called
 	     * after the fxml file has been loaded.
@@ -86,6 +87,10 @@ public class ClientFormulaireController {
 	            okClicked = true;
 	            dialogStage.close();
 	        }
+	        /*File clientFile = mainApp.getClientFilePath();
+	        if (clientFile != null) {
+	            mainApp.saveClientDataToFile(clientFile);
+	        }*/
 	    }
 	    //action bouton annuler
 	    @FXML
@@ -97,7 +102,7 @@ public class ClientFormulaireController {
 	    }
 	    //teste l'email si correct
 	    public boolean isEmailValid(){
-	    	if(Pattern.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)+$",emailField.getText())){
+	    	if(Pattern.matches("^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)+$",emailField.getText())){
 	    		return true;
 	    	}
 	    	else{return false;}
@@ -158,7 +163,6 @@ public class ClientFormulaireController {
 	        if (numComField.getText() == null || numComField.getText().length() == 0) {
 	            errorMessage += "Numéro de commande invalide!\n";
 	        }else {
-	            // try to parse the postal code into an int.
 	            try {
 	                Integer.parseInt(numComField.getText());
 	            } catch (NumberFormatException e) {
@@ -168,7 +172,6 @@ public class ClientFormulaireController {
 	        if (errorMessage.length() == 0) {
 	            return true;
 	        } else {
-	            // Show the error message.
 	            Alert alert = new Alert(AlertType.ERROR);
 	            alert.initOwner(dialogStage);
 	            alert.setTitle("Champ invalide");
