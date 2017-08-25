@@ -10,11 +10,12 @@ private MainApp mainApp;
 	public void handleClient(){
 		mainApp.showMenuClient();
 	}
-	/*
+	
 	@FXML
-	public void handleRep(){
-		mainApp.showMenuRep();
-	} 
+	public void handleRepresentant(){
+		mainApp.showMenuRepresentant();
+	}
+	/*
 	@FXML
 	public void handlePros(){
 		mainApp.showMenuPros();

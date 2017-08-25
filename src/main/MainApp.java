@@ -22,9 +22,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Client;
 import model.ClientListeEnregistrement;
+import model.RepresentantListeEnregistrement;
+import model.Representant;
 import view.ClientFormulaireController;
 import view.ClientOverviewController;
 import view.MenuPrincipaleController;
+import view.RepresentantFormulaireController;
+import view.RepresentantOverviewController;
 import view.RootLayoutController;
 
 
@@ -34,12 +38,16 @@ import view.RootLayoutController;
 	    private Stage primaryStage;
 	    private BorderPane rootLayout;  
 	    private ObservableList<Client> clientData = FXCollections.observableArrayList();//Liste clients
+	    private ObservableList<Representant> representantData = FXCollections.observableArrayList();//Liste représentants
 	    
 	    public MainApp() {
 	    }
 	    public ObservableList<Client> getClientData() {
 	        return clientData;
-	    }    
+	    }
+	    public ObservableList<Representant> getRepresentantData() {
+	        return representantData;
+	    } 
 	    @Override
 	    public void start(Stage primaryStage) {
 	        this.primaryStage = primaryStage;
@@ -109,6 +117,30 @@ import view.RootLayoutController;
 	            loadClientDataFromFile(file);
 	        }
 	    }
+	    
+	    //Fenetre représentant
+	    public void showMenuRepresentant() {
+	        try {
+	            // Load person overview.
+	            FXMLLoader loader = new FXMLLoader();
+	            loader.setLocation(MainApp.class.getResource("/view/RepresentantFenetre.fxml"));
+	            AnchorPane RepresentantFenetre = (AnchorPane) loader.load();
+
+	            // Set person overview into the center of root layout.
+	            rootLayout.setCenter(RepresentantFenetre);
+	            RepresentantOverviewController controller = loader.getController();
+	            controller.setMainApp(this);
+	            
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        
+	     // Try to load last opened person file.
+	        File file = getRepresentantFilePath();
+	        if (file != null) {
+	            loadClientDataFromFile(file);
+	        }
+	    }
 	    //Fenetre formulaire client
 	    public boolean showClientFormulaire(Client client) {
 	        try {
@@ -138,7 +170,46 @@ import view.RootLayoutController;
 	        }
 	         
 	}
+	  //Fenetre formulaire representant
+	    public boolean showRepresentantFormulaire(Representant representant) {
+	        try {
+	            // Charge le fichier fxml du formulaire Representant.
+	            FXMLLoader loader = new FXMLLoader();
+	            loader.setLocation(MainApp.class.getResource("/view/RepresentantFormulaire.fxml"));
+	            AnchorPane page = (AnchorPane) loader.load();
+
+	            // Creation du stage.
+	            Stage dialogStage = new Stage();
+	            dialogStage.setTitle("Formulaire Representant");
+	            dialogStage.initModality(Modality.WINDOW_MODAL);
+	            dialogStage.initOwner(primaryStage);
+	            Scene scene             = new Scene(page);
+	            dialogStage.setScene(scene);
+
+	            RepresentantFormulaireController controller = loader.getController();
+	            controller.setDialogStage(dialogStage);
+	            controller.setRepresentant(representant);
+
+	            // Afficher la boîte de dialogue et attendre que l'utilisateur la ferme
+	            dialogStage.showAndWait();
+	            return controller.isOkClicked();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+	         
+	}
 	    public File getClientFilePath() {
+	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+	        String filePath = prefs.get("filePath", null);
+	        if (filePath != null) {
+	            return new File(filePath);
+	        } else {
+	            return null;
+	        }
+	    }
+	    
+	    public File getRepresentantFilePath() {
 	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
 	        String filePath = prefs.get("filePath", null);
 	        if (filePath != null) {
@@ -166,6 +237,19 @@ import view.RootLayoutController;
 	            primaryStage.setTitle("Toutbois");
 	        }
 	    }  
+	    
+	    public void setRepresentantFilePath(File file) {
+	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+	        if (file != null) {
+	            prefs.put("filePath", file.getPath());
+	            // Update the stage title.
+	            primaryStage.setTitle("Toutbois - " + file.getName());
+	        } else {
+	            prefs.remove("filePath");
+	            // Update the stage title.
+	            primaryStage.setTitle("Toutbois");
+	        }
+	    }  
 	    public void loadClientDataFromFile(File file) {
 	        try {
 	            JAXBContext context = JAXBContext.newInstance(ClientListeEnregistrement.class);
@@ -176,6 +260,30 @@ import view.RootLayoutController;
 
 	            clientData.clear();
 	            clientData.addAll(wrapper.getClients());
+
+	            // Save the file path to the registry.
+	            setClientFilePath(file);
+
+	        } catch (Exception e) { // catches ANY exception
+	            Alert alert = new Alert(AlertType.ERROR);
+	            alert.setTitle("Erreur");
+	            alert.setHeaderText("Could not load data");
+	            alert.setContentText("Could not load data from file:\n" + file.getPath());
+
+	            alert.showAndWait();
+	        }
+	    }
+	    
+	    public void loadRepresentantDataFromFile(File file) {
+	        try {
+	            JAXBContext context = JAXBContext.newInstance(RepresentantListeEnregistrement.class);
+	            Unmarshaller um = context.createUnmarshaller();
+
+	            // Reading XML from the file and unmarshalling.
+	            RepresentantListeEnregistrement wrapper = (RepresentantListeEnregistrement) um.unmarshal(file);
+
+	            representantData.clear();
+	            representantData.addAll(wrapper.getRepresentants());
 
 	            // Save the file path to the registry.
 	            setClientFilePath(file);
