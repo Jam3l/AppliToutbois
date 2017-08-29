@@ -9,18 +9,12 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ClientFormulaireController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" stylesheets="@DarkTheme2.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ClientFormulaireController">
    <children>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0">
-        <buttons>
-          <Button mnemonicParsing="false" onAction="#handleOk" text="OK" />
-            <Button mnemonicParsing="false" onAction="#handleCancel" text="Annuler" />
-        </buttons>
-      </ButtonBar>
-      <GridPane AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+      <GridPane prefHeight="407.0" prefWidth="661.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="20.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="124.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="376.0" minWidth="10.0" prefWidth="376.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1000.0" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -33,14 +27,14 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Numéro client" />
-            <Label text="Enseigne" GridPane.rowIndex="1" />
-            <Label text="Adresse" GridPane.rowIndex="2" />
-            <Label text="Email" GridPane.rowIndex="3" />
-            <Label text="Téléphone" GridPane.rowIndex="4" />
-            <Label text="Siret" GridPane.rowIndex="5" />
-            <Label text="Numéro représentant" GridPane.rowIndex="6" />
-            <Label text="Commande numéro" GridPane.rowIndex="7" />
+            <Label styleClass="label-bright" text="Numéro client" />
+            <Label styleClass="label-bright" text="Enseigne" GridPane.rowIndex="1" />
+            <Label styleClass="label-bright" text="Adresse" GridPane.rowIndex="2" />
+            <Label styleClass="label-bright" text="Email" GridPane.rowIndex="3" />
+            <Label styleClass="label-bright" text="Téléphone" GridPane.rowIndex="4" />
+            <Label styleClass="label-bright" text="Siret" GridPane.rowIndex="5" />
+            <Label styleClass="label-bright" text="Numéro représentant" GridPane.rowIndex="6" />
+            <Label styleClass="label-bright" text="Commande numéro" GridPane.rowIndex="7" />
             <TextField fx:id="numClientField" GridPane.columnIndex="1" />
             <TextField fx:id="enseigneField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="adresseField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -48,8 +42,14 @@
             <TextField fx:id="telField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="siretField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="numRepField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField fx:id="numComField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="numComField" prefHeight="12.0" prefWidth="454.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
+      <ButtonBar prefHeight="40.0" prefWidth="250.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+        <buttons>
+          <Button mnemonicParsing="false" onAction="#handleOk" prefWidth="180.0" text="OK" />
+            <Button mnemonicParsing="false" onAction="#handleCancel" prefWidth="180.0" text="Annuler" />
+        </buttons>
+      </ButtonBar>
    </children>
 </AnchorPane>

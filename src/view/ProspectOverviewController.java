@@ -110,4 +110,15 @@ public class ProspectOverviewController {
 	public void handleMenu(){
 		mainApp.showMenuPrincipale();
 	}
+	
+	@FXML
+	public void handleDevientClient(){
+		mainApp.showMenuPrincipale();
+		Alert alert = new Alert(AlertType.WARNING);
+        alert.initOwner(mainApp.getPrimaryStage());
+        alert.setTitle(":(");
+        alert.setHeaderText("Ce bouton ne marche pas!");
+        alert.setContentText("Désolé, Jamel n'a pas encore fini son boulot");
+        alert.showAndWait();
+	}
 }

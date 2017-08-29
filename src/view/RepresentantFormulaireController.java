@@ -1,7 +1,9 @@
 package view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.Representant;
 
@@ -65,7 +67,7 @@ public class RepresentantFormulaireController {
     //action bouton OK
     @FXML
     private void handleOk() {
-        //if (isInputValid()) {
+        if (isInputValid()) {
         	representant.setNumRepresentant(numRepresentantField.getText());
         	representant.setNomRepresentant(nomField.getText());
         	representant.setPrenomRepresentant(prenomField.getText());
@@ -74,7 +76,7 @@ public class RepresentantFormulaireController {
     
             okClicked = true;
             dialogStage.close();
-       // }
+        }
     }
     //action bouton annuler
     @FXML
@@ -83,5 +85,38 @@ public class RepresentantFormulaireController {
     		representant.setRepresentantCompteur(representant.getRepresentantCompteur()-1);
     	}
         dialogStage.close();
+    }
+    
+  //vérifie si les champs sont valide
+    private boolean isInputValid() {
+        String errorMessage = "";
+        if (numRepresentantField.getText() == null || numRepresentantField.getText().length() == 0) {
+            errorMessage += "Numéro Représentant invalide!\n";
+        }
+        if (nomField.getText() == null || nomField.getText().length() == 0) {
+            errorMessage += "Nom invalide!\n";
+        }
+        if (prenomField.getText() == null || prenomField.getText().length() == 0) {
+            errorMessage += "Prénom invalide!\n";
+        }
+        if (tauxField.getText() == null || tauxField.getText().length() == 0)  {
+            errorMessage += "Taux de commission invalide!\n" ;
+        } 
+        if (salaireField.getText() == null || salaireField.getText().length() != 14) {
+            errorMessage += "Salaire fixe Brut invalide!\n";
+        } 
+
+
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Champ invalide");
+            alert.setHeaderText("Veuillez remplir correctement les champs");
+            alert.setContentText(errorMessage);
+            alert.showAndWait();
+            return false;
+        }
     }
 }

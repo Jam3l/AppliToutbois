@@ -17,7 +17,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Client;
@@ -90,7 +89,7 @@ import view.RootLayoutController;
 	            
 	            FXMLLoader loader = new FXMLLoader();
 	            loader.setLocation(MainApp.class.getResource("/view/MenuPrincipal.fxml"));
-	            HBox MenuPrincipal = (HBox) loader.load();
+	            AnchorPane MenuPrincipal = (AnchorPane) loader.load();
 
 	            
 	            rootLayout.setCenter(MenuPrincipal);
@@ -195,7 +194,7 @@ import view.RootLayoutController;
 	        }
 	        
 	     // Try to load last opened person file.
-	        File file = getClientFilePath();
+	        File file = getProspectFilePath();
 	        if (file != null) {
 	            loadProspectDataFromFile(file);
 	        }
@@ -339,7 +338,7 @@ import view.RootLayoutController;
 	            clientData.addAll(wrapper.getClients());
 
 	            // Save the file path to the registry.
-	            //setClientFilePath(file);
+	            setClientFilePath(file);
 
 	        } catch (Exception e) { // catches ANY exception
 	            Alert alert = new Alert(AlertType.ERROR);

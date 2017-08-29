@@ -10,13 +10,13 @@ import javafx.scene.control.TextField;
 import main.MainApp;
 import model.Client;
 
-public class ClientOverviewController {		//test merge 2
+public class ClientOverviewController {		
 	@FXML
-	private TableView<Client>clientTable; 	//Jamel Test Merge + test mika
+	private TableView<Client>clientTable; 	
 	@FXML
-	private TableColumn<Client,String>numClientColumn; // test 2 mika
+	private TableColumn<Client,String>numClientColumn; 
 	@FXML
-	private TableColumn<Client,String>enseigneColumn; // commgit 
+	private TableColumn<Client,String>enseigneColumn; 
 	@FXML
 	private TableColumn<Client,String>adresseColumn;
 	@FXML
