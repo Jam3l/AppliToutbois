@@ -10,18 +10,18 @@
 }
 
 .label-bright {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13pt;
     -fx-text-fill: #40A497;
+    -fx-font-weight: bold;
     -fx-opacity: 1;
 }
 
 
 .label-header {
-    -fx-font-size: 32pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 32pt;   
     -fx-text-fill: #E38101;
-    -fx-opacity: 1;   
+    -fx-font-weight: bold;
+    -fx-opacity: 0.8;   
 }
 
 .table-view {
@@ -133,8 +133,7 @@
     -fx-border-style: solid, segments(1, 1);
     -fx-border-radius: 0, 0;
     -fx-border-insets: 1 1 1 1, 0;
-}
-*/
+}*/
 
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
