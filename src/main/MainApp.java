@@ -15,9 +15,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Client;
@@ -60,6 +60,7 @@ import view.RootLayoutController;
 	    public void start(Stage primaryStage) {
 	        this.primaryStage = primaryStage;
 	        this.primaryStage.setTitle("Toutbois");
+	        this.primaryStage.getIcons().add(new Image("file:Images/Dragon.png"));
 
 	        initRootLayout();
 	        showMenuPrincipale();
@@ -90,7 +91,7 @@ import view.RootLayoutController;
 	            
 	            FXMLLoader loader = new FXMLLoader();
 	            loader.setLocation(MainApp.class.getResource("/view/MenuPrincipal.fxml"));
-	            HBox MenuPrincipal = (HBox) loader.load();
+	            AnchorPane MenuPrincipal = (AnchorPane) loader.load();
 
 	            rootLayout.setCenter(MenuPrincipal);
 	            //rootLayout.hide();
