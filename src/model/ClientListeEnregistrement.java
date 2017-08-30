@@ -1,7 +1,6 @@
 package model;
 
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -9,7 +8,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 public class ClientListeEnregistrement {
 	 private List<Client> clients;
-
 	 @XmlElement(name = "client")
 	 public List<Client> getClients() {
 		 return clients;

@@ -81,6 +81,7 @@ public class ProspectOverviewController {
         boolean okClicked = mainApp.showProspectFormulaire(tempProspect);
         if (okClicked) {
             mainApp.getProspectData().add(tempProspect);
+            System.out.println("tempPropect "+tempProspect);
         }
     }
     /**

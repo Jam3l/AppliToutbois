@@ -92,7 +92,6 @@ import view.RootLayoutController;
 	            loader.setLocation(MainApp.class.getResource("/view/MenuPrincipal.fxml"));
 	            HBox MenuPrincipal = (HBox) loader.load();
 
-	            
 	            rootLayout.setCenter(MenuPrincipal);
 	            //rootLayout.hide();
 	            MenuPrincipaleController controller = loader.getController();
@@ -109,7 +108,6 @@ import view.RootLayoutController;
 	            FXMLLoader loader = new FXMLLoader();
 	            loader.setLocation(MainApp.class.getResource("/view/ClientFenetre.fxml"));
 	            AnchorPane ClientFenetre = (AnchorPane) loader.load();
-
 	            // Set person overview into the center of root layout.
 	            rootLayout.setCenter(ClientFenetre);
 	            ClientOverviewController controller = loader.getController();
@@ -144,9 +142,9 @@ import view.RootLayoutController;
 	        }
 	        
 	     // Try to load last opened person file.
-	        File file = getRepresentantFilePath();
-	        if (file != null) {
-	            loadClientDataFromFile(file);
+	        File file3 = getRepresentantFilePath();
+	        if (file3 != null) {
+	            loadRepresentantDataFromFile(file3);
 	        }
 	    }
 	    //Fenetre formulaire client
@@ -195,9 +193,9 @@ import view.RootLayoutController;
 	        }
 	        
 	     // Try to load last opened person file.
-	        File file = getClientFilePath();
-	        if (file != null) {
-	            loadProspectDataFromFile(file);
+	        File file2 = getProspectFilePath();
+	        if (file2 != null) {
+	            loadProspectDataFromFile(file2);
 	        }
 	    }
 	  //Fenetre formulaire prospect
@@ -241,7 +239,7 @@ import view.RootLayoutController;
 	            dialogStage.setTitle("Formulaire Representant");
 	            dialogStage.initModality(Modality.WINDOW_MODAL);
 	            dialogStage.initOwner(primaryStage);
-	            Scene scene             = new Scene(page);
+	            Scene scene = new Scene(page);
 	            dialogStage.setScene(scene);
 
 	            RepresentantFormulaireController controller = loader.getController();
@@ -267,19 +265,19 @@ import view.RootLayoutController;
 	        }
 	    }
 	    public File getProspectFilePath() {
-	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-	        String filePath = prefs.get("prospect", null);
-	        if (filePath != null) {
-	            return new File(filePath);
+	        Preferences prefs2 = Preferences.userNodeForPackage(MainApp.class);
+	        String filePath2 = prefs2.get("prospect", null);
+	        if (filePath2 != null) {
+	            return new File(filePath2);
 	        } else {
 	            return null;
 	        }
 	    }
 	    public File getRepresentantFilePath() {
-	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-	        String filePath = prefs.get("filePath", null);
-	        if (filePath != null) {
-	            return new File(filePath);
+	        Preferences prefs3 = Preferences.userNodeForPackage(MainApp.class);
+	        String filePath3 = prefs3.get("representant", null);
+	        if (filePath3 != null) {
+	            return new File(filePath3);
 	        } else {
 	            return null;
 	        }
@@ -302,27 +300,26 @@ import view.RootLayoutController;
 	            primaryStage.setTitle("Toutbois");
 	        }
 	    }  
-	    public void setProspectFilePath(File file) {
-	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-	        if (file != null) {
-	            prefs.put("prospect", file.getPath());
+	    public void setProspectFilePath(File file2) {
+	        Preferences prefs2 = Preferences.userNodeForPackage(MainApp.class);
+	        if (file2 != null) {
+	            prefs2.put("prospect", file2.getPath());
 	            // Update the stage title.
-	            primaryStage.setTitle("Toutbois - " + file.getName());
+	            primaryStage.setTitle("Toutbois - " + file2.getName());
 	        } else {
-	            prefs.remove("prospect");
+	            prefs2.remove("prospect");
 	            // Update the stage title.
 	            primaryStage.setTitle("Toutbois");
 	        }
 	    }  
-	    
-	    public void setRepresentantFilePath(File file) {
-	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-	        if (file != null) {
-	            prefs.put("filePath", file.getPath());
+	    public void setRepresentantFilePath(File file3) {
+	        Preferences prefs3 = Preferences.userNodeForPackage(MainApp.class);
+	        if (file3 != null) {
+	            prefs3.put("representant", file3.getPath());
 	            // Update the stage title.
-	            primaryStage.setTitle("Toutbois - " + file.getName());
+	            primaryStage.setTitle("Toutbois - " + file3.getName());
 	        } else {
-	            prefs.remove("filePath");
+	            prefs3.remove("representant");
 	            // Update the stage title.
 	            primaryStage.setTitle("Toutbois");
 	        }
@@ -339,7 +336,7 @@ import view.RootLayoutController;
 	            clientData.addAll(wrapper.getClients());
 
 	            // Save the file path to the registry.
-	            //setClientFilePath(file);
+	            setClientFilePath(file);
 
 	        } catch (Exception e) { // catches ANY exception
 	            Alert alert = new Alert(AlertType.ERROR);
@@ -350,47 +347,47 @@ import view.RootLayoutController;
 	            alert.showAndWait();
 	        }
 	    }
-	    public void loadProspectDataFromFile(File file) {
+	    public void loadProspectDataFromFile(File file2) {
 	        try {
-	            JAXBContext context = JAXBContext.newInstance(ProspectListeEnregistrement.class);
-	            Unmarshaller um = context.createUnmarshaller();
+	            JAXBContext context2 = JAXBContext.newInstance(ProspectListeEnregistrement.class);
+	            Unmarshaller um2 = context2.createUnmarshaller();
 
 	            // Reading XML from the file and unmarshalling.
-	            ProspectListeEnregistrement wrapper = (ProspectListeEnregistrement) um.unmarshal(file);
+	            ProspectListeEnregistrement wrapper2 = (ProspectListeEnregistrement) um2.unmarshal(file2);
 
 	            prospectData.clear();
-	            prospectData.addAll(wrapper.getProspects());
+	            prospectData.addAll(wrapper2.getProspects());
 	         // Save the file path to the registry.
-	            setClientFilePath(file);
+	            setProspectFilePath(file2);
 
 	        } catch (Exception e) { // catches ANY exception
 	            Alert alert = new Alert(AlertType.ERROR);
 	            alert.setTitle("Erreur");
 	            alert.setHeaderText("Could not load data");
-	            alert.setContentText("Could not load data from file:\n" + file.getPath());
+	            alert.setContentText("Could not load data from file:\n" + file2.getPath());
 
 	            alert.showAndWait();
 	        }
 	    }
-	    public void loadRepresentantDataFromFile(File file) {
+	    public void loadRepresentantDataFromFile(File file3) {
 	        try {
-	            JAXBContext context = JAXBContext.newInstance(RepresentantListeEnregistrement.class);
-	            Unmarshaller um = context.createUnmarshaller();
+	            JAXBContext context3 = JAXBContext.newInstance(RepresentantListeEnregistrement.class);
+	            Unmarshaller um3 = context3.createUnmarshaller();
 
 	            // Reading XML from the file and unmarshalling.
-	            RepresentantListeEnregistrement wrapper = (RepresentantListeEnregistrement) um.unmarshal(file);
+	            RepresentantListeEnregistrement wrapper3 = (RepresentantListeEnregistrement) um3.unmarshal(file3);
 
 	            representantData.clear();
-	            representantData.addAll(wrapper.getRepresentants());
+	            representantData.addAll(wrapper3.getRepresentants());
 
 	            // Save the file path to the registry.
-	            setClientFilePath(file);
+	            setRepresentantFilePath(file3);
 
 	        } catch (Exception e) { // catches ANY exception
 	            Alert alert = new Alert(AlertType.ERROR);
 	            alert.setTitle("Erreur");
 	            alert.setHeaderText("Could not load data");
-	            alert.setContentText("Could not load data from file:\n" + file.getPath());
+	            alert.setContentText("Could not load data from file:\n" + file3.getPath());
 
 	            alert.showAndWait();
 	        }
@@ -424,26 +421,50 @@ import view.RootLayoutController;
 	            alert.showAndWait();
 	        }
 	    }
-	    public void saveProspectDataToFile(File file) {
+	    public void saveProspectDataToFile(File file2) {
 	        try {
-	            JAXBContext context = JAXBContext.newInstance(ProspectListeEnregistrement.class);
-	            Marshaller m = context.createMarshaller();
-	            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+	            JAXBContext context2 = JAXBContext.newInstance(ProspectListeEnregistrement.class);
+	            Marshaller m2 = context2.createMarshaller();
+	            m2.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 	            // Wrapping our person data.
-	            ProspectListeEnregistrement wrapper = new ProspectListeEnregistrement();
-	            wrapper.setProspects(prospectData);
+	            ProspectListeEnregistrement wrapper2 = new ProspectListeEnregistrement();
+	            wrapper2.setProspects(prospectData);
 
 	            // Marshalling and saving XML to the file.
-	            m.marshal(wrapper, file);
+	            m2.marshal(wrapper2, file2);
 
 	            // Save the file path to the registry.
-	            setProspectFilePath(file);
+	            setProspectFilePath(file2);
 	        } catch (Exception e) { // catches ANY exception
 	            Alert alert = new Alert(AlertType.ERROR);
 	            alert.setTitle("Erreur");
 	            alert.setHeaderText("Could not save data");
-	            alert.setContentText("Could not save data to file:\n" + file.getPath());
+	            alert.setContentText("Could not save data to file:\n" + file2.getPath());
+
+	            alert.showAndWait();
+	        }
+	    }
+	    public void saveRepresentantDataToFile(File file3) {
+	        try {
+	            JAXBContext context3 = JAXBContext.newInstance(RepresentantListeEnregistrement.class);
+	            Marshaller m3 = context3.createMarshaller();
+	            m3.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+	            // Wrapping our person data.
+	            RepresentantListeEnregistrement wrapper3 = new RepresentantListeEnregistrement();
+	            wrapper3.setRepresentants(representantData);
+
+	            // Marshalling and saving XML to the file.
+	            m3.marshal(wrapper3, file3);
+
+	            // Save the file path to the registry.
+	            setRepresentantFilePath(file3);
+	        } catch (Exception e) { // catches ANY exception
+	            Alert alert = new Alert(AlertType.ERROR);
+	            alert.setTitle("Erreur");
+	            alert.setHeaderText("Could not save data");
+	            alert.setContentText("Could not save data to file:\n" + file3.getPath());
 
 	            alert.showAndWait();
 	        }
