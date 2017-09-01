@@ -11,6 +11,12 @@ public class Client {
 	private final StringProperty numClient;
 	private final StringProperty enseigne;
 	private final StringProperty adresse;
+	private final StringProperty numeroRue;
+	private final StringProperty voieBox;
+	private final StringProperty nomRue;
+	private final StringProperty codePostal;
+	private final StringProperty ville;
+	private final StringProperty pays;
 	private final StringProperty email;
 	private final StringProperty tel;
 	private final StringProperty siret;
@@ -25,13 +31,18 @@ public class Client {
 		this.numClient = new SimpleStringProperty(numCli);
 		this.enseigne = new SimpleStringProperty();
 		this.adresse = new SimpleStringProperty();
+		this.numeroRue = new SimpleStringProperty();
+		this.voieBox = new SimpleStringProperty();
+		this.nomRue = new SimpleStringProperty();
+		this.codePostal = new SimpleStringProperty();
+		this.ville = new SimpleStringProperty();
+		this.pays = new SimpleStringProperty();
 		this.email = new SimpleStringProperty();
 		this.tel = new SimpleStringProperty();
 		this.siret = new SimpleStringProperty();
 		this.numRep = new SimpleStringProperty();
 		this.numCom = new SimpleIntegerProperty();
 	}
-	
 	public String getNumClient() {return numClient.get();}
 	public void setNumClient(String numClient) {this.numClient.set(numClient);}            
 	public StringProperty numClientProperty() {return numClient;}
@@ -43,6 +54,30 @@ public class Client {
 	public String getAdresse() {return adresse.get();}
 	public void setAdresse(String adresse) {this.adresse.set(adresse);}
 	public StringProperty adresseProperty() {return adresse;}
+	
+	public String getNumeroRue() {return numeroRue.get();}
+	public void setNumeroRue(String numeroRue) {this.numeroRue.set(numeroRue);}
+	public StringProperty numeroRueProperty() {return numeroRue;}
+	
+	public String getVoieBox() {return voieBox.get();}
+	public void setVoieBox(String voieBox) {this.voieBox.set(voieBox);}
+	public StringProperty voieBoxProperty() {return voieBox;}
+	
+	public String getNomRue() {return nomRue.get();}
+	public void setNomRue(String nomRue) {this.nomRue.set(nomRue);}
+	public StringProperty nomRueProperty() {return nomRue;}
+	
+	public String getCodePostal() {return codePostal.get();}
+	public void setCodePostal(String codePostal) {this.codePostal.set(codePostal);}
+	public StringProperty codePostalProperty() {return codePostal;}
+	
+	public String getVille() {return ville.get();}
+	public void setVille(String ville) {this.ville.set(ville);}
+	public StringProperty villeProperty() {return ville;}
+	
+	public String getPays() {return pays.get();}
+	public void setPays(String pays) {this.pays.set(pays);}
+	public StringProperty paysProperty() {return pays;}
 	
 	public String getEmail() {return email.get();}
 	public void setEmail(String email) {this.email.set(email);}
@@ -63,18 +98,11 @@ public class Client {
 	public int getNumCom() {return numCom.get();}
 	public void setNumCom(int numCom) {this.numCom.set(numCom);}
 	public IntegerProperty numComProperty() {return numCom;}
-
+	
 	public int getClientCompteur() {
 		return clientCompteur;
 	}
-
 	public void setClientCompteur(int clientCompteur) {
 		Client.clientCompteur = clientCompteur;
 	}
-
-	
-	
-	
-	
-	
 }
