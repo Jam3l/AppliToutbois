@@ -7,6 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import main.MainApp;
+import model.Client;
 import model.Prospect;
 
 public class ProspectOverviewController {
@@ -114,12 +115,10 @@ public class ProspectOverviewController {
 	
 	@FXML
 	public void handleDevientClient(){
-		mainApp.showMenuPrincipale();
-		Alert alert = new Alert(AlertType.WARNING);
-        alert.initOwner(mainApp.getPrimaryStage());
-        alert.setTitle(":(");
-        alert.setHeaderText("Ce bouton ne marche pas!");
-        alert.setContentText("Désolé, Jamel n'a pas encore fini son boulot");
-        alert.showAndWait();
+		Client tempClient = new Client();
+        mainApp.showClientFormulaire(tempClient);     
+        }
+	          
+	    
 	}
-}
+

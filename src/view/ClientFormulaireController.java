@@ -4,9 +4,11 @@ import java.util.regex.Pattern;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Client;
+import model.TypeVoie;
 
 public class ClientFormulaireController {	
 	    @FXML
@@ -14,7 +16,17 @@ public class ClientFormulaireController {
 	    @FXML
 	    private TextField enseigneField;
 	    @FXML
-	    private TextField adresseField;
+	    private TextField numeroRue;
+	    @FXML
+	    private ComboBox<TypeVoie> voieBox;
+	    @FXML
+	    private TextField nomRue;
+	    @FXML
+	    private TextField codePostal;
+	    @FXML
+	    private TextField ville;
+	    @FXML
+	    private TextField pays;	    
 	    @FXML
 	    private TextField emailField;
 	    @FXML
@@ -27,7 +39,8 @@ public class ClientFormulaireController {
 	    private TextField numComField;
 	    private Stage dialogStage;
 	    private Client client;
-	    private boolean okClicked = false;
+	    private boolean okClicked = false; 
+	    
 	    
 	    /**
 	     * Initializes the controller class. This method is automatically called
@@ -35,6 +48,7 @@ public class ClientFormulaireController {
 	     */
 	    @FXML
 	    private void initialize() {
+	    	voieBox.getItems().setAll(TypeVoie.values());	    	
 	    }
 	    /**
 	     * Sets the stage of this dialog.
@@ -57,12 +71,28 @@ public class ClientFormulaireController {
 	        this.client = client;
 	        numClientField.setText(client.getNumClient());
 	        enseigneField.setText(client.getEnseigne());
-	        adresseField.setText(client.getAdresse());
+	        numeroRue.setText(client.getNumeroRue());
+	        
+	        if (client.getVoieBox()!=null){
+	        //voieBox.setPromptText(client.getVoieBox());	        
+	        voieBox.setValue(TypeVoie.valueOf(client.getVoieBox()));
+	        }	        
+	        else{ 
+	        	//voieBox.setPromptText("rue");	        
+		        voieBox.setValue(TypeVoie.rue);
+	        }
+	        	
+	        	
+	        nomRue.setText(client.getNomRue());
+	        codePostal.setText(client.getCodePostal());
+	        ville.setText(client.getVille());
+	        pays.setText(client.getPays());
 	        emailField.setText(client.getEmail());
 	        telField.setText(client.getTel());
 	        siretField.setText(client.getSiret());
 	        numRepField.setText(client.getNumRep());
 	        numComField.setText(Integer.toString(client.getNumCom()));  
+	        
 	    }
 	    /**
 	     * Returns true if the user clicked OK, false otherwise.
@@ -74,11 +104,17 @@ public class ClientFormulaireController {
 	    }
 	    //action bouton OK
 	    @FXML
-	    private void handleOk() {
+	    private void handleOk() {	    	
 	        if (isInputValid()) {
 	        	client.setNumClient(numClientField.getText());
 	            client.setEnseigne(enseigneField.getText());
-	            client.setAdresse(adresseField.getText());
+	            client.setNumeroRue(numeroRue.getText());		           
+	            client.setVoieBox(voieBox.getValue().toString());
+	            client.setNomRue(nomRue.getText());
+	            client.setCodePostal(codePostal.getText());
+	            client.setVille(ville.getText());
+	            client.setPays(pays.getText());	            
+	            client.setAdresse(client.getNumeroRue()+" "+voieBox.getValue().toString()+" "+client.getNomRue()+" "+client.getCodePostal()+" "+client.getVille()+" "+client.getPays());
 	            client.setEmail(emailField.getText());
 	            client.setTel(telField.getText());
 	            client.setSiret(siretField.getText());
@@ -114,6 +150,8 @@ public class ClientFormulaireController {
 	    	}
 	    	else{return false;}
 	    }
+	    
+	    
 	    //teste si il y a bien 10 chiffres
 	    public boolean nbTelValid(){
 	    	int i,j,valid = 0;
@@ -145,9 +183,24 @@ public class ClientFormulaireController {
 	        if (enseigneField.getText() == null || enseigneField.getText().length() == 0) {
 	            errorMessage += "Enseigne invalide!\n";
 	        }
-	        if (adresseField.getText() == null || adresseField.getText().length() == 0) {
-	            errorMessage += "Adresse invalide!\n";
+	        if (numeroRue.getText() == null || numeroRue.getText().length() == 0) {
+	           errorMessage += "Numero de rue invalide!\n";
 	        }
+	        if (voieBox.getValue()==null){
+	        	errorMessage += "Type de Voie invalide!\n";
+	        }
+	        if (nomRue.getText() == null || nomRue.getText().length() == 0) {
+		           errorMessage += "Nom de rue invalide!\n";
+		        }
+	        if (codePostal.getText() == null || codePostal.getText().length() == 0) {
+		           errorMessage += "Code Postal invalide!\n";
+		        }
+	        if (ville.getText() == null || ville.getText().length() == 0) {
+		           errorMessage += "Ville invalide!\n";
+		        }
+	        if (pays.getText() == null || pays.getText().length() == 0) {
+		           errorMessage += "Pays invalide!\n";
+		        }
 	        if (emailField.getText() == null || emailField.getText().length() == 0 || isEmailValid() == false) {
 	            errorMessage += "Email invalide!\n";
 	        }

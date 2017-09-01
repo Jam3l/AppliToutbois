@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import main.MainApp;
 import model.Client;
+import model.TypeVoie;
 
 public class ClientOverviewController {		
 	@FXML
@@ -74,7 +75,7 @@ public class ClientOverviewController {
             // Fill the labels with info from the person object.
             numClientLabel.setText(client.getNumClient());
             enseigneLabel.setText(client.getEnseigne());
-            adresseLabel.setText(client.getAdresse());
+            adresseLabel.setText(client.getAdresse());            
             emailLabel.setText(client.getEmail());
             telLabel.setText(client.getTel());
             siretLabel.setText(client.getSiret());
@@ -116,8 +117,7 @@ public class ClientOverviewController {
             alert.showAndWait();
         }
     }
-    @FXML
-    private void handleNewClient() {
+    @FXML public void handleNewClient() {
         Client tempClient = new Client();
         presser = true;
         boolean okClicked = mainApp.showClientFormulaire(tempClient);
