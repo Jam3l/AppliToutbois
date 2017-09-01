@@ -18,7 +18,6 @@ public class Representant {
 		representantCompteur ++;
 		String numRepCompteur = Integer.toString(representantCompteur);
 		numRep = "R" + numRepCompteur;
-		
 		this.numRepresentant = new SimpleStringProperty(numRep);
 		this.nomRepresentant = new SimpleStringProperty();
 		this.prenomRepresentant = new SimpleStringProperty();
@@ -46,15 +45,10 @@ public class Representant {
 	public void setSalaireRepresentant(String salaireRepresentant) {this.salaireRepresentant.set(salaireRepresentant);}
 	public StringProperty salaireRepresentantProperty() {return salaireRepresentant;}
 
+	public int getRepresentantCompteur() {return representantCompteur;}	
+	public void setRepresentantCompteur(int representantCompteur) {Representant.representantCompteur = representantCompteur;}
 
-	public int getRepresentantCompteur() {
-		return representantCompteur;
-	}
-	
-	public void setRepresentantCompteur(int representantCompteur) {
-		Representant.representantCompteur = representantCompteur;
-	}
-
-	
+	@Override
+	public String toString() {return this.getNumRepresentant() + " " + this.getNomRepresentant();}
 
 }

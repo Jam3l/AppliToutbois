@@ -2,6 +2,7 @@ package main;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.prefs.Preferences;
 
 import javax.xml.bind.JAXBContext;
@@ -45,8 +46,11 @@ import view.RootLayoutController;
 	    private ObservableList<Prospect> prospectData = FXCollections.observableArrayList();//Liste prospects
 	    private ObservableList<Representant> representantData = FXCollections.observableArrayList();//Liste représentants
 	    
+	    
 	    public MainApp() {
+	    	
 	    }
+	    
 	    public ObservableList<Client> getClientData() {
 	        return clientData;
 	    }
@@ -56,14 +60,23 @@ import view.RootLayoutController;
 	    public ObservableList<Representant> getRepresentantData() {
 	        return representantData;
 	    } 
+	    
+	    
+	    
 	    @Override
 	    public void start(Stage primaryStage) {
 	        this.primaryStage = primaryStage;
 	        this.primaryStage.setTitle("Toutbois");
 	        this.primaryStage.getIcons().add(new Image("file:Images/Dragon.png"));
+	        
 
+	        
 	        initRootLayout();
+	        showMenuProspect();
+	        showMenuRepresentant();
+	        showMenuClient();
 	        showMenuPrincipale();
+	        
 	    }
 	    public void initRootLayout() {
 	    	try {
@@ -217,6 +230,7 @@ import view.RootLayoutController;
 
 	            ProspectFormulaireController controllerP = loader.getController();
 	            controllerP.setDialogStage(dialogStageP);
+	            controllerP.setMainApp(this);
 	            controllerP.setProspect(prospect);
 
 	            // Afficher la boîte de dialogue et attendre que l'utilisateur la ferme
@@ -380,7 +394,7 @@ import view.RootLayoutController;
 
 	            representantData.clear();
 	            representantData.addAll(wrapper3.getRepresentants());
-
+	            
 	            // Save the file path to the registry.
 	            setRepresentantFilePath(file3);
 
