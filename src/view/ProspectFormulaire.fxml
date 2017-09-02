@@ -30,9 +30,27 @@
             <Label styleClass="label-bright" text="Adresse" GridPane.rowIndex="2" />
             <Label styleClass="label-bright" text="N° Représentant" GridPane.rowIndex="3" />
             <TextField fx:id="enseigneProspectField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="adresseProspectField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <DatePicker fx:id="datePicker" promptText="Sélectionner une date --&gt;" GridPane.columnIndex="1" />
             <ComboBox fx:id="numRepProspectField" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" prefWidth="108.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="200.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="numeroRueProspectField" />
+                  <TextField fx:id="codePostalProspectField" GridPane.rowIndex="1" />
+                  <TextField fx:id="paysProspectField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField fx:id="nomRueProspectField" GridPane.columnIndex="2" />
+                  <TextField fx:id="villeProspectField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="voieBoxProspectField" prefHeight="25.0" prefWidth="153.0" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
          </children>
       </GridPane>
       <ButtonBar layoutX="286.0" layoutY="346.0" prefHeight="40.0" prefWidth="250.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">

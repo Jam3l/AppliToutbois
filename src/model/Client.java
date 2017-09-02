@@ -1,7 +1,9 @@
 package model;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -22,6 +24,7 @@ public class Client {
 	private final StringProperty siret;
 	private final StringProperty numRep; 
 	private final IntegerProperty numCom;
+	private final ObjectProperty<Representant> repComboC;
 	private static int clientCompteur;
 	
 	public Client() {
@@ -42,6 +45,7 @@ public class Client {
 		this.siret = new SimpleStringProperty();
 		this.numRep = new SimpleStringProperty();
 		this.numCom = new SimpleIntegerProperty();
+		this.repComboC = new SimpleObjectProperty<Representant>();
 	}
 	public String getNumClient() {return numClient.get();}
 	public void setNumClient(String numClient) {this.numClient.set(numClient);}            
@@ -98,6 +102,10 @@ public class Client {
 	public int getNumCom() {return numCom.get();}
 	public void setNumCom(int numCom) {this.numCom.set(numCom);}
 	public IntegerProperty numComProperty() {return numCom;}
+	
+	public Representant getRepComboC() {return repComboC.get();}
+	public void setRepComboC(Representant repComboC) {this.repComboC.set(repComboC);}            
+	public ObjectProperty<Representant> repComboCProperty() {return repComboC;}
 	
 	public int getClientCompteur() {
 		return clientCompteur;

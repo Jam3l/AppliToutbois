@@ -42,7 +42,6 @@
             <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="telField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="siretField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="numRepField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <TextField fx:id="numComField" prefHeight="12.0" prefWidth="454.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
               <columnConstraints>
@@ -69,6 +68,7 @@
                      </padding></ComboBox>
                </children>
             </GridPane>
+            <ComboBox fx:id="numRepClientField" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
       <ButtonBar prefHeight="40.0" prefWidth="250.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">

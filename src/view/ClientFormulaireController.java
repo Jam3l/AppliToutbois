@@ -7,7 +7,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import main.MainApp;
 import model.Client;
+import model.Representant;
 import model.TypeVoie;
 
 public class ClientFormulaireController {	
@@ -34,21 +36,24 @@ public class ClientFormulaireController {
 	    @FXML
 	    private TextField siretField;
 	    @FXML
-	    private TextField numRepField;
+	    private ComboBox<Representant> numRepClientField;
 	    @FXML
 	    private TextField numComField;
 	    private Stage dialogStage;
 	    private Client client;
-	    private boolean okClicked = false; 
+	    private boolean okClicked = false;
+		private MainApp mainApp; 
 	    
-	    
+	    public void setMainApp(MainApp mainApp) {
+	        this.mainApp = mainApp;
+	    }
 	    /**
 	     * Initializes the controller class. This method is automatically called
 	     * after the fxml file has been loaded.
 	     */
 	    @FXML
 	    private void initialize() {
-	    	voieBox.getItems().setAll(TypeVoie.values());	    	
+	    	voieBox.getItems().setAll(TypeVoie.values());//on rempli la comboBox avec les valeurs de la classe enum "TypeVoie"
 	    }
 	    /**
 	     * Sets the stage of this dialog.
@@ -72,17 +77,11 @@ public class ClientFormulaireController {
 	        numClientField.setText(client.getNumClient());
 	        enseigneField.setText(client.getEnseigne());
 	        numeroRue.setText(client.getNumeroRue());
-	        
-	        if (client.getVoieBox()!=null){
-	        //voieBox.setPromptText(client.getVoieBox());	        
+	        if (client.getVoieBox()!=null){        
 	        voieBox.setValue(TypeVoie.valueOf(client.getVoieBox()));
-	        }	        
-	        else{ 
-	        	//voieBox.setPromptText("rue");	        
+	        }else{        
 		        voieBox.setValue(TypeVoie.rue);
 	        }
-	        	
-	        	
 	        nomRue.setText(client.getNomRue());
 	        codePostal.setText(client.getCodePostal());
 	        ville.setText(client.getVille());
@@ -90,9 +89,9 @@ public class ClientFormulaireController {
 	        emailField.setText(client.getEmail());
 	        telField.setText(client.getTel());
 	        siretField.setText(client.getSiret());
-	        numRepField.setText(client.getNumRep());
-	        numComField.setText(Integer.toString(client.getNumCom()));  
-	        
+	        numRepClientField.setValue(client.getRepComboC());
+	        numRepClientField.setItems(mainApp.getRepresentantData()); 
+	        numComField.setText(Integer.toString(client.getNumCom()));   
 	    }
 	    /**
 	     * Returns true if the user clicked OK, false otherwise.
@@ -118,15 +117,12 @@ public class ClientFormulaireController {
 	            client.setEmail(emailField.getText());
 	            client.setTel(telField.getText());
 	            client.setSiret(siretField.getText());
-	            client.setNumRep(numRepField.getText());
+	            client.setNumRep(numRepClientField.getValue().getNumRepresentant().toString());
+	        	client.setRepComboC(numRepClientField.getValue());
 	            client.setNumCom(Integer.parseInt(numComField.getText()));
 	            okClicked = true;
 	            dialogStage.close();
 	        }
-	        /*File clientFile = mainApp.getClientFilePath();
-	        if (clientFile != null) {
-	            mainApp.saveClientDataToFile(clientFile);
-	        }*/
 	    }
 	    //action bouton annuler
 	    @FXML
@@ -150,8 +146,6 @@ public class ClientFormulaireController {
 	    	}
 	    	else{return false;}
 	    }
-	    
-	    
 	    //teste si il y a bien 10 chiffres
 	    public boolean nbTelValid(){
 	    	int i,j,valid = 0;
@@ -210,7 +204,7 @@ public class ClientFormulaireController {
 	        if (siretField.getText() == null || siretField.getText().length() != 14 || isSiretValid() == false) {
 	            errorMessage += "Siret invalide!\n";
 	        }
-	        if (numRepField.getText() == null || numRepField.getText().length() == 0) {
+	        if (numRepClientField.getValue()==null) {
 	            errorMessage += "Numéro représentant invalide!\n";
 	        }
 	        if (numComField.getText() == null || numComField.getText().length() == 0) {

@@ -179,6 +179,7 @@ import view.RootLayoutController;
 
 	            ClientFormulaireController controller = loader.getController();
 	            controller.setDialogStage(dialogStage);
+	            controller.setMainApp(this);
 	            controller.setClient(client);
 
 	            // Afficher la boîte de dialogue et attendre que l'utilisateur la ferme

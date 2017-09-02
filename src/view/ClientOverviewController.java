@@ -9,7 +9,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import main.MainApp;
 import model.Client;
-import model.TypeVoie;
 
 public class ClientOverviewController {		
 	@FXML
