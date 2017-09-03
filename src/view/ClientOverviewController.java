@@ -1,5 +1,7 @@
 package view;
 
+import java.io.File;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -116,7 +118,8 @@ public class ClientOverviewController {
             alert.showAndWait();
         }
     }
-    @FXML public void handleNewClient() {
+    @FXML 
+    public void handleNewClient() {
         Client tempClient = new Client();
         presser = true;
         boolean okClicked = mainApp.showClientFormulaire(tempClient);
@@ -149,6 +152,9 @@ public class ClientOverviewController {
     }
     @FXML
 	public void handleMenu(){
+    	File file = mainApp.getClientFilePath();
+        if (file != null) {
+            mainApp.saveClientDataToFile(file);}
 		mainApp.showMenuPrincipale();
 	}
 	public static boolean isPresser() {

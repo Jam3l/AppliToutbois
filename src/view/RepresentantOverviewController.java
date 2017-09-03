@@ -1,5 +1,7 @@
 package view;
 
+import java.io.File;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -154,6 +156,9 @@ public class RepresentantOverviewController {
     
     @FXML
   	public void handleMenu(){
+    	File file3 = mainApp.getRepresentantFilePath();
+        if (file3 != null) {
+            mainApp.saveRepresentantDataToFile(file3);}
   		mainApp.showMenuPrincipale();
   	}
   	public static boolean isPresser() {

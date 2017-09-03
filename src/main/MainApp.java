@@ -2,13 +2,10 @@ package main;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.prefs.Preferences;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -69,12 +66,16 @@ import view.RootLayoutController;
 	        this.primaryStage.setTitle("Toutbois");
 	        this.primaryStage.getIcons().add(new Image("file:Images/Dragon.png"));
 	        
-
-	        
 	        initRootLayout();
-	        showMenuProspect();
-	        showMenuRepresentant();
-	        showMenuClient();
+	        File file = getClientFilePath();
+	        if (file != null) {
+	            loadClientDataFromFile(file);}
+	        File file2 = getProspectFilePath();
+	        if (file2 != null) {
+	            loadProspectDataFromFile(file2);}
+	        File file3 = getRepresentantFilePath();
+	        if (file3 != null) {
+	            loadRepresentantDataFromFile(file3);}
 	        showMenuPrincipale();
 	        
 	    }
@@ -168,7 +169,6 @@ import view.RootLayoutController;
 	            FXMLLoader loader = new FXMLLoader();
 	            loader.setLocation(MainApp.class.getResource("/view/ClientFormulaire.fxml"));
 	            AnchorPane page = (AnchorPane) loader.load();
-
 	            // Creation du stage.
 	            Stage dialogStage = new Stage();
 	            dialogStage.setTitle("Formulaire client");
@@ -176,12 +176,10 @@ import view.RootLayoutController;
 	            dialogStage.initOwner(primaryStage);
 	            Scene scene = new Scene(page);
 	            dialogStage.setScene(scene);
-
 	            ClientFormulaireController controller = loader.getController();
 	            controller.setDialogStage(dialogStage);
 	            controller.setMainApp(this);
 	            controller.setClient(client);
-
 	            // Afficher la boîte de dialogue et attendre que l'utilisateur la ferme
 	            dialogStage.showAndWait();
 	            return controller.isOkClicked();

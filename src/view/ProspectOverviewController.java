@@ -1,5 +1,6 @@
 package view;
 
+import java.io.File;
 import java.time.LocalDate;
 
 import javafx.fxml.FXML;
@@ -32,6 +33,8 @@ public class ProspectOverviewController {
 	@FXML
 	private Label numRepProspectLabel;
 	private MainApp mainApp;
+	public static int devientClient = 0;
+	public static Prospect selProspect;
 	
 	public ProspectOverviewController(){
 	}
@@ -111,15 +114,44 @@ public class ProspectOverviewController {
 	
 	@FXML
 	public void handleMenu(){
+		File file2 = mainApp.getProspectFilePath();
+        if (file2 != null) {
+            mainApp.saveProspectDataToFile(file2);}
 		mainApp.showMenuPrincipale();
 	}
 	
 	@FXML
 	public void handleDevientClient(){
-		Client tempClient = new Client();
-        mainApp.showClientFormulaire(tempClient);     
+		selProspect = prospectTable.getSelectionModel().getSelectedItem();
+		if (selProspect != null) {
+			devientClient = 1;
+			ClientOverviewController.presser = true;
+			MenuPrincipaleController.a = 1;
+			
+			Client tempClient = new Client();
+			boolean okClicked = mainApp.showClientFormulaire(tempClient);
+			
+	        if (okClicked) {
+	        	//prospectTable.getItems().remove(selProspect);
+	        	ProspectOverviewController.devientClient = 0;
+	            mainApp.getProspectData().remove(selProspect);
+	            File file2 = mainApp.getProspectFilePath();
+	            if (file2 != null) {
+	                mainApp.saveProspectDataToFile(file2);}
+	            mainApp.showMenuClient();
+	            mainApp.getClientData().add(tempClient);
+	            Client.clientCompteur ++;
+	            
+	        }
+		} else {
+            // Nothing selected.
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Pas de sélection");
+            alert.setHeaderText("Aucun prospect sélectionner");
+            alert.setContentText("Veuillez sélectionner un prospect.");
+            alert.showAndWait();
         }
-	          
-	    
-	}
+	}	    
+}
 

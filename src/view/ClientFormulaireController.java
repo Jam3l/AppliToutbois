@@ -42,7 +42,7 @@ public class ClientFormulaireController {
 	    private Stage dialogStage;
 	    private Client client;
 	    private boolean okClicked = false;
-		private MainApp mainApp; 
+		private MainApp mainApp;
 	    
 	    public void setMainApp(MainApp mainApp) {
 	        this.mainApp = mainApp;
@@ -63,7 +63,12 @@ public class ClientFormulaireController {
 	    public void setDialogStage(Stage dialogStage) {
 	        this.dialogStage = dialogStage;
 	        //decompte le numero de client qui a été créer si l'on ferme la fenetre
-	        dialogStage.setOnCloseRequest( event -> {if(ClientOverviewController.isPresser() == true){
+	        dialogStage.setOnCloseRequest( event -> {
+	        	if(ProspectOverviewController.devientClient == 1){
+	        		client.setClientCompteur(client.getClientCompteur()-1);
+	        	}
+	        	ProspectOverviewController.devientClient = 0;
+	        	if(ClientOverviewController.isPresser() == true){
 	    		client.setClientCompteur(client.getClientCompteur()-1);
 	    	}});
 	    }
@@ -73,25 +78,41 @@ public class ClientFormulaireController {
 	     * @param person
 	     */
 	    public void setClient(Client client) {
-	        this.client = client;
-	        numClientField.setText(client.getNumClient());
-	        enseigneField.setText(client.getEnseigne());
-	        numeroRue.setText(client.getNumeroRue());
-	        if (client.getVoieBox()!=null){        
-	        voieBox.setValue(TypeVoie.valueOf(client.getVoieBox()));
-	        }else{        
-		        voieBox.setValue(TypeVoie.rue);
-	        }
-	        nomRue.setText(client.getNomRue());
-	        codePostal.setText(client.getCodePostal());
-	        ville.setText(client.getVille());
-	        pays.setText(client.getPays());
-	        emailField.setText(client.getEmail());
-	        telField.setText(client.getTel());
-	        siretField.setText(client.getSiret());
-	        numRepClientField.setValue(client.getRepComboC());
-	        numRepClientField.setItems(mainApp.getRepresentantData()); 
-	        numComField.setText(Integer.toString(client.getNumCom()));   
+	    	if(ProspectOverviewController.devientClient == 1){
+	    		Client.clientCompteur ++;
+	    		this.client = client;
+	    		numClientField.setText(client.getNumClient());
+		    	enseigneField.setText(ProspectOverviewController.selProspect.getEnseigneProspect()); 
+		    	numeroRue.setText(ProspectOverviewController.selProspect.getNumeroRueProspect());
+		    	voieBox.setValue(TypeVoie.valueOf(ProspectOverviewController.selProspect.getVoieBoxProspect()));
+		    	nomRue.setText(ProspectOverviewController.selProspect.getNomRueProspect());
+		        codePostal.setText(ProspectOverviewController.selProspect.getCodePostalProspect());
+		        ville.setText(ProspectOverviewController.selProspect.getVilleProspect());
+		        pays.setText(ProspectOverviewController.selProspect.getPaysProspect());
+		        numRepClientField.setItems(mainApp.getRepresentantData()); 
+		        numRepClientField.setValue(ProspectOverviewController.selProspect.getRepCombo());
+		        numComField.setText("1");
+	    	}else{
+	        	this.client = client;
+		        numClientField.setText(client.getNumClient());
+		        enseigneField.setText(client.getEnseigne());
+		        numeroRue.setText(client.getNumeroRue());
+		        if (client.getVoieBox()!=null){        
+		        	voieBox.setValue(TypeVoie.valueOf(client.getVoieBox()));
+		        }else{        
+			        voieBox.setValue(TypeVoie.rue);
+		        }
+		        nomRue.setText(client.getNomRue());
+		        codePostal.setText(client.getCodePostal());
+		        ville.setText(client.getVille());
+		        pays.setText(client.getPays());
+		        emailField.setText(client.getEmail());
+		        telField.setText(client.getTel());
+		        siretField.setText(client.getSiret());
+		        numRepClientField.setValue(client.getRepComboC());
+		        numRepClientField.setItems(mainApp.getRepresentantData()); 
+		        numComField.setText(Integer.toString(client.getNumCom()));   
+	    	}
 	    }
 	    /**
 	     * Returns true if the user clicked OK, false otherwise.
@@ -104,7 +125,7 @@ public class ClientFormulaireController {
 	    //action bouton OK
 	    @FXML
 	    private void handleOk() {	    	
-	        if (isInputValid()) {
+	        if (isInputValid()) {//Si tous les champs sont valide enregistrement dans les variables de la classe client
 	        	client.setNumClient(numClientField.getText());
 	            client.setEnseigne(enseigneField.getText());
 	            client.setNumeroRue(numeroRue.getText());		           
@@ -127,9 +148,15 @@ public class ClientFormulaireController {
 	    //action bouton annuler
 	    @FXML
 	    private void handleCancel() {
+	    	//Decompte du compteur client si on appuie sur annuler
+	    	if(ProspectOverviewController.devientClient == 1){
+        		client.setClientCompteur(client.getClientCompteur()-1);
+        	}
+	    	ProspectOverviewController.devientClient = 0;
 	    	if(ClientOverviewController.isPresser() == true){
 	    		client.setClientCompteur(client.getClientCompteur()-1);
 	    	}
+	    	//fermeture de la fenetre
 	        dialogStage.close();
 	    }
 	    //teste l'email si correct
@@ -165,6 +192,7 @@ public class ClientFormulaireController {
 				return true;
 			}else{return false;}	
 	    }
+	    //Teste le n° de siret
 	    public boolean isSiretValid(){
 	    	if(Pattern.matches("^([0-9]+)+$",siretField.getText())){
 	    		return true;
@@ -175,37 +203,37 @@ public class ClientFormulaireController {
 	    private boolean isInputValid() {
 	        String errorMessage = "";
 	        if (enseigneField.getText() == null || enseigneField.getText().length() == 0) {
-	            errorMessage += "Enseigne invalide!\n";
+	            errorMessage += "Enseigne invalide!\n---------------\n";
 	        }
 	        if (numeroRue.getText() == null || numeroRue.getText().length() == 0) {
-	           errorMessage += "Numero de rue invalide!\n";
+	           errorMessage += "Numero de rue invalide!\n---------------\n";
 	        }
 	        if (voieBox.getValue()==null){
-	        	errorMessage += "Type de Voie invalide!\n";
+	        	errorMessage += "Type de Voie invalide!\n---------------\n";
 	        }
 	        if (nomRue.getText() == null || nomRue.getText().length() == 0) {
-		           errorMessage += "Nom de rue invalide!\n";
+		           errorMessage += "Nom de rue invalide!\n---------------\n";
 		        }
 	        if (codePostal.getText() == null || codePostal.getText().length() == 0) {
-		           errorMessage += "Code Postal invalide!\n";
+		           errorMessage += "Code Postal invalide!\n---------------\n";
 		        }
 	        if (ville.getText() == null || ville.getText().length() == 0) {
-		           errorMessage += "Ville invalide!\n";
+		           errorMessage += "Ville invalide!\n---------------\n";
 		        }
 	        if (pays.getText() == null || pays.getText().length() == 0) {
-		           errorMessage += "Pays invalide!\n";
+		           errorMessage += "Pays invalide!\n---------------\n";
 		        }
 	        if (emailField.getText() == null || emailField.getText().length() == 0 || isEmailValid() == false) {
-	            errorMessage += "Email invalide!\n";
+	            errorMessage += "Email invalide!\n---------------\n";
 	        }
 	        if (telField.getText() == null || telField.getText().length() == 0 || isTelValid() == false || nbTelValid() == false) {
-	            errorMessage += "Téléphone invalide!\n" ;
+	            errorMessage += "Téléphone invalide!\nVeuillez utiliser ces formats:\n01.23.45.69.78\n0123456789\n---------------\n" ;
 	        } 
 	        if (siretField.getText() == null || siretField.getText().length() != 14 || isSiretValid() == false) {
-	            errorMessage += "Siret invalide!\n";
+	            errorMessage += "Siret invalide!(14 chiffres)\n---------------\n";
 	        }
 	        if (numRepClientField.getValue()==null) {
-	            errorMessage += "Numéro représentant invalide!\n";
+	            errorMessage += "Numéro représentant invalide!\n---------------\n";
 	        }
 	        if (numComField.getText() == null || numComField.getText().length() == 0) {
 	            errorMessage += "Numéro de commande invalide!\n";

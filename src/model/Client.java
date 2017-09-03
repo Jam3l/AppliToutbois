@@ -25,7 +25,7 @@ public class Client {
 	private final StringProperty numRep; 
 	private final IntegerProperty numCom;
 	private final ObjectProperty<Representant> repComboC;
-	private static int clientCompteur;
+	public static int clientCompteur;
 	
 	public Client() {
 		clientCompteur ++;
