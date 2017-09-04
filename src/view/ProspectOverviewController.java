@@ -132,7 +132,6 @@ public class ProspectOverviewController {
 			boolean okClicked = mainApp.showClientFormulaire(tempClient);
 			
 	        if (okClicked) {
-	        	//prospectTable.getItems().remove(selProspect);
 	        	ProspectOverviewController.devientClient = 0;
 	            mainApp.getProspectData().remove(selProspect);
 	            File file2 = mainApp.getProspectFilePath();

@@ -2,6 +2,7 @@ package view;
 
 
 import main.MainApp;
+import java.util.regex.Pattern;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -37,18 +38,18 @@ public class ProspectFormulaireController {
 	private Stage dialogStageP;
 	private Prospect prospect;
 	private MainApp mainApp;
+	// initialise la combobox type voie
 	@FXML
     private void initialize() {
         voieBoxProspectField.getItems().setAll(TypeVoie.values());
     }
-	
 	public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-        
+        this.mainApp = mainApp;  
     }
     public void setDialogStage(Stage dialogStageP) {  
     	this.dialogStageP = dialogStageP;
     }
+    // Définit le prospect à éditer dans la boîte de dialogue
     public void setProspect(Prospect prospect) {
     	this.prospect = prospect;
         enseigneProspectField.setText(prospect.getEnseigneProspect());
@@ -93,6 +94,13 @@ public class ProspectFormulaireController {
     private void handleCancel() {
         dialogStageP.close();
     }
+  //teste le code postal
+    public boolean isCPValid(){
+    	if(Pattern.matches("^([0-9]+)+$",codePostalProspectField.getText())){
+    		return true;
+    	}
+    	else{return false;}
+    }
     //vérifie si les champs sont valide
     private boolean isInputValid() {
         String errorMessage = "";
@@ -108,7 +116,7 @@ public class ProspectFormulaireController {
 	    if (nomRueProspectField.getText() == null || nomRueProspectField.getText().length() == 0) {
 		    errorMessage += "Nom de rue invalide!\n";
 		}
-	    if (codePostalProspectField.getText() == null || codePostalProspectField.getText().length() == 0) {
+	    if (codePostalProspectField.getText() == null || codePostalProspectField.getText().length() == 0 || isCPValid() == false) {
 	    	errorMessage += "Code Postal invalide!\n";
 		}
 	    if (villeProspectField.getText() == null || villeProspectField.getText().length() == 0) {

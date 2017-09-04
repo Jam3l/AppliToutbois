@@ -33,8 +33,6 @@ import view.RepresentantFormulaireController;
 import view.RepresentantOverviewController;
 import view.RootLayoutController;
 
-
-
 	public class MainApp extends Application {
 
 	    private Stage primaryStage;
@@ -43,11 +41,8 @@ import view.RootLayoutController;
 	    private ObservableList<Prospect> prospectData = FXCollections.observableArrayList();//Liste prospects
 	    private ObservableList<Representant> representantData = FXCollections.observableArrayList();//Liste représentants
 	    
-	    
-	    public MainApp() {
-	    	
+	    public MainApp() {	
 	    }
-	    
 	    public ObservableList<Client> getClientData() {
 	        return clientData;
 	    }
@@ -57,16 +52,14 @@ import view.RootLayoutController;
 	    public ObservableList<Representant> getRepresentantData() {
 	        return representantData;
 	    } 
-	    
-	    
-	    
 	    @Override
 	    public void start(Stage primaryStage) {
 	        this.primaryStage = primaryStage;
 	        this.primaryStage.setTitle("Toutbois");
-	        this.primaryStage.getIcons().add(new Image("file:Images/Dragon.png"));
-	        
+	        this.primaryStage.getIcons().add(new Image("file:Images/Dragon.png"));//icone de l'appli  
+	        // chargement du root layout
 	        initRootLayout();
+	        // chargement des fichiers xml de sauvegarde
 	        File file = getClientFilePath();
 	        if (file != null) {
 	            loadClientDataFromFile(file);}
@@ -76,24 +69,22 @@ import view.RootLayoutController;
 	        File file3 = getRepresentantFilePath();
 	        if (file3 != null) {
 	            loadRepresentantDataFromFile(file3);}
+	        // chargement pour affichage du menu principal
 	        showMenuPrincipale();
-	        
 	    }
 	    public void initRootLayout() {
 	    	try {
-	            // Load root layout from fxml file.
+	            // charge le root layout a partir du fichier fxml
 	            FXMLLoader loader = new FXMLLoader();
 	            loader.setLocation(MainApp.class.getResource("/view/RootLayout.fxml"));
 	            rootLayout = (BorderPane) loader.load();
-
-	            // Show the scene containing the root layout.
+	            // affichage de la scene contenant le root layout.
 	            Scene scene = new Scene(rootLayout);
 	            primaryStage.setScene(scene);
-
-	            // Give the controller access to the main app.
+	            // Donne l'accès au contrôleur main app.
 	            RootLayoutController controller = loader.getController();
 	            controller.setMainApp(this);
-
+	            // affichage du primaryStage
 	            primaryStage.show();
 	        } catch (IOException e) {
 	            e.printStackTrace();
@@ -102,16 +93,15 @@ import view.RootLayoutController;
 	    //Fenetre principale
 	    public void showMenuPrincipale() {
 	        try {
-	            
+	        	// charge le menu principale a partir du fichier fxml
 	            FXMLLoader loader = new FXMLLoader();
 	            loader.setLocation(MainApp.class.getResource("/view/MenuPrincipal.fxml"));
 	            AnchorPane MenuPrincipal = (AnchorPane) loader.load();
-
+                // affichage du menu principale dans le root layout
 	            rootLayout.setCenter(MenuPrincipal);
-	            //rootLayout.hide();
+	            // Donne l'accès au contrôleur
 	            MenuPrincipaleController controller = loader.getController();
-	            controller.setMainApp(this);
-	            
+	            controller.setMainApp(this);   
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
@@ -119,44 +109,40 @@ import view.RootLayoutController;
 	    //Fenetre client
 	    public void showMenuClient() {
 	        try {
-	            // Load person overview.
+	        	// charge le menu client a partir du fichier fxml
 	            FXMLLoader loader = new FXMLLoader();
 	            loader.setLocation(MainApp.class.getResource("/view/ClientFenetre.fxml"));
 	            AnchorPane ClientFenetre = (AnchorPane) loader.load();
-	            // Set person overview into the center of root layout.
+	            // affichage du menu client dans le root layout
 	            rootLayout.setCenter(ClientFenetre);
+	            // Donne l'accès au contrôleur
 	            ClientOverviewController controller = loader.getController();
-	            controller.setMainApp(this);
-	            
+	            controller.setMainApp(this);    
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
-	        
-	     // Try to load last opened person file.
+	        // charge le fichier xml client
 	        File file = getClientFilePath();
 	        if (file != null) {
 	            loadClientDataFromFile(file);
 	        }
-	    }
-	    
+	    }  
 	    //Fenetre représentant
 	    public void showMenuRepresentant() {
 	        try {
-	            // Load person overview.
+	        	// charge le menu representant a partir du fichier fxml
 	            FXMLLoader loader = new FXMLLoader();
 	            loader.setLocation(MainApp.class.getResource("/view/RepresentantFenetre.fxml"));
 	            AnchorPane RepresentantFenetre = (AnchorPane) loader.load();
-
-	            // Set person overview into the center of root layout.
+	            // affichage du menu representant dans le root layout
 	            rootLayout.setCenter(RepresentantFenetre);
+	            // Donne l'accès au contrôleur
 	            RepresentantOverviewController controller = loader.getController();
-	            controller.setMainApp(this);
-	            
+	            controller.setMainApp(this); 
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
-	        
-	     // Try to load last opened person file.
+	        // charge le fichier xml representant
 	        File file3 = getRepresentantFilePath();
 	        if (file3 != null) {
 	            loadRepresentantDataFromFile(file3);
@@ -176,6 +162,7 @@ import view.RootLayoutController;
 	            dialogStage.initOwner(primaryStage);
 	            Scene scene = new Scene(page);
 	            dialogStage.setScene(scene);
+	            // Donne l'accès au contrôleur
 	            ClientFormulaireController controller = loader.getController();
 	            controller.setDialogStage(dialogStage);
 	            controller.setMainApp(this);
@@ -191,21 +178,19 @@ import view.RootLayoutController;
 	    //Fenetre prospect
 	    public void showMenuProspect() {
 	        try {
-	            // Load person overview.
+	        	// Charge le fichier fxml du formulaire prospect
 	            FXMLLoader loaderP = new FXMLLoader();
 	            loaderP.setLocation(MainApp.class.getResource("/view/ProspectFenetre.fxml"));
 	            AnchorPane ProspectFenetre = (AnchorPane) loaderP.load();
-
-	            // Set person overview into the center of root layout.
+	            // affichage du menu representant dans le root layout
 	            rootLayout.setCenter(ProspectFenetre);
+	            // Donne l'accès au contrôleur
 	            ProspectOverviewController controllerP = loaderP.getController();
-	            controllerP.setMainApp(this);
-	            
+	            controllerP.setMainApp(this);    
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
-	        
-	     // Try to load last opened person file.
+	        // charge le fichier xml representant
 	        File file2 = getProspectFilePath();
 	        if (file2 != null) {
 	            loadProspectDataFromFile(file2);
@@ -218,7 +203,6 @@ import view.RootLayoutController;
 	            FXMLLoader loader = new FXMLLoader();
 	            loader.setLocation(MainApp.class.getResource("/view/ProspectFormulaire.fxml"));
 	            AnchorPane pageP = (AnchorPane) loader.load();
-
 	            // Creation du stage.
 	            Stage dialogStageP = new Stage();
 	            dialogStageP.setTitle("Formulaire prospect");
@@ -226,12 +210,11 @@ import view.RootLayoutController;
 	            dialogStageP.initOwner(primaryStage);
 	            Scene sceneP = new Scene(pageP);
 	            dialogStageP.setScene(sceneP);
-
+	            // Donne l'accès au contrôleur
 	            ProspectFormulaireController controllerP = loader.getController();
 	            controllerP.setDialogStage(dialogStageP);
 	            controllerP.setMainApp(this);
 	            controllerP.setProspect(prospect);
-
 	            // Afficher la boîte de dialogue et attendre que l'utilisateur la ferme
 	            dialogStageP.showAndWait();
 	            return controllerP.isOkClicked();
@@ -247,7 +230,6 @@ import view.RootLayoutController;
 	            FXMLLoader loader = new FXMLLoader();
 	            loader.setLocation(MainApp.class.getResource("/view/RepresentantFormulaire.fxml"));
 	            AnchorPane page = (AnchorPane) loader.load();
-
 	            // Creation du stage.
 	            Stage dialogStage = new Stage();
 	            dialogStage.setTitle("Formulaire Representant");
@@ -255,19 +237,17 @@ import view.RootLayoutController;
 	            dialogStage.initOwner(primaryStage);
 	            Scene scene = new Scene(page);
 	            dialogStage.setScene(scene);
-
+	            // Donne l'accès au contrôleur
 	            RepresentantFormulaireController controller = loader.getController();
 	            controller.setDialogStage(dialogStage);
 	            controller.setRepresentant(representant);
-
 	            // Afficher la boîte de dialogue et attendre que l'utilisateur la ferme
 	            dialogStage.showAndWait();
 	            return controller.isOkClicked();
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	            return false;
-	        }
-	         
+	        }   
 	}
 	    public File getClientFilePath() {
 	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
@@ -296,21 +276,16 @@ import view.RootLayoutController;
 	            return null;
 	        }
 	    }
-	    /**
-	     * Sets the file path of the currently loaded file. The path is persisted in
-	     * the OS specific registry.
-	     * 
-	     * @param file the file or null to remove the path
-	     */
+	    //  Définit le chemin du fichier actuellement chargé. Le chemin est persévéré dans le registre spécifique au système d'exploitation.
 	    public void setClientFilePath(File file) {
 	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
 	        if (file != null) {
 	            prefs.put("client", file.getPath());
-	            // Update the stage title.
+	            // Met à jour le titre de la scène.
 	            primaryStage.setTitle("Toutbois - " + file.getName());
 	        } else {
 	            prefs.remove("client");
-	            // Update the stage title.
+	            // Met à jour le titre de la scène.
 	            primaryStage.setTitle("Toutbois");
 	        }
 	    }  
@@ -318,11 +293,11 @@ import view.RootLayoutController;
 	        Preferences prefs2 = Preferences.userNodeForPackage(MainApp.class);
 	        if (file2 != null) {
 	            prefs2.put("prospect", file2.getPath());
-	            // Update the stage title.
+	            // Met à jour le titre de la scène.
 	            primaryStage.setTitle("Toutbois - " + file2.getName());
 	        } else {
 	            prefs2.remove("prospect");
-	            // Update the stage title.
+	            // Met à jour le titre de la scène.
 	            primaryStage.setTitle("Toutbois");
 	        }
 	    }  
@@ -330,108 +305,95 @@ import view.RootLayoutController;
 	        Preferences prefs3 = Preferences.userNodeForPackage(MainApp.class);
 	        if (file3 != null) {
 	            prefs3.put("representant", file3.getPath());
-	            // Update the stage title.
+	            // Met à jour le titre de la scène.
 	            primaryStage.setTitle("Toutbois - " + file3.getName());
 	        } else {
 	            prefs3.remove("representant");
-	            // Update the stage title.
+	            // Met à jour le titre de la scène..
 	            primaryStage.setTitle("Toutbois");
 	        }
 	    }  
+	    // methode pour le chargement du fichier client
 	    public void loadClientDataFromFile(File file) {
 	        try {
 	            JAXBContext context = JAXBContext.newInstance(ClientListeEnregistrement.class);
 	            Unmarshaller um = context.createUnmarshaller();
-
-	            // Reading XML from the file and unmarshalling.
+	            // Lecture du XML à partir du fichier
 	            ClientListeEnregistrement wrapper = (ClientListeEnregistrement) um.unmarshal(file);
-
+	            //effacement du fichier
 	            clientData.clear();
+	            //enregistrement du fichier
 	            clientData.addAll(wrapper.getClients());
-
-	            // Save the file path to the registry.
+	            // Enregistre le chemin du fichier dans le registre.
 	            setClientFilePath(file);
-
 	        } catch (Exception e) { // catches ANY exception
 	            Alert alert = new Alert(AlertType.ERROR);
 	            alert.setTitle("Erreur");
-	            alert.setHeaderText("Could not load data");
-	            alert.setContentText("Could not load data from file(client):\n" + file.getPath());
-
+	            alert.setHeaderText("Impossible de charger des données");
+	            alert.setContentText("Impossible de charger les données à partir de :\n" + file.getPath());
 	            alert.showAndWait();
 	        }
 	    }
+	    // methode pour le chargement du fichier prospect
 	    public void loadProspectDataFromFile(File file2) {
 	        try {
 	            JAXBContext context2 = JAXBContext.newInstance(ProspectListeEnregistrement.class);
 	            Unmarshaller um2 = context2.createUnmarshaller();
-
-	            // Reading XML from the file and unmarshalling.
+	            // Lecture du XML à partir du fichier
 	            ProspectListeEnregistrement wrapper2 = (ProspectListeEnregistrement) um2.unmarshal(file2);
-
+	            //effacement du fichier
 	            prospectData.clear();
+	            //enregistrement du fichier
 	            prospectData.addAll(wrapper2.getProspects());
-	         // Save the file path to the registry.
+	            // Enregistre le chemin du fichier dans le registre.
 	            setProspectFilePath(file2);
-
 	        } catch (Exception e) { // catches ANY exception
 	            Alert alert = new Alert(AlertType.ERROR);
 	            alert.setTitle("Erreur");
-	            alert.setHeaderText("Could not load data");
-	            alert.setContentText("Could not load data from file:\n" + file2.getPath());
-
+	            alert.setHeaderText("Impossible de charger des données");
+	            alert.setContentText("Impossible de charger les données à partir de :\n" + file2.getPath());
 	            alert.showAndWait();
 	        }
 	    }
+	    // methode pour le chargement du fichier representant
 	    public void loadRepresentantDataFromFile(File file3) {
 	        try {
 	            JAXBContext context3 = JAXBContext.newInstance(RepresentantListeEnregistrement.class);
 	            Unmarshaller um3 = context3.createUnmarshaller();
-
-	            // Reading XML from the file and unmarshalling.
+	            // Lecture du XML à partir du fichier
 	            RepresentantListeEnregistrement wrapper3 = (RepresentantListeEnregistrement) um3.unmarshal(file3);
-
+	            //effacement du fichier
 	            representantData.clear();
+	            //enregistrement du fichier
 	            representantData.addAll(wrapper3.getRepresentants());
-	            
-	            // Save the file path to the registry.
+	            // Enregistre le chemin du fichier dans le registre.
 	            setRepresentantFilePath(file3);
-
 	        } catch (Exception e) { // catches ANY exception
 	            Alert alert = new Alert(AlertType.ERROR);
 	            alert.setTitle("Erreur");
-	            alert.setHeaderText("Could not load data");
-	            alert.setContentText("Could not load data from file:\n" + file3.getPath());
-
+	            alert.setHeaderText("Impossible de charger des données");
+	            alert.setContentText("Impossible de charger les données à partir de :\n" + file3.getPath());
 	            alert.showAndWait();
 	        }
 	    }
-	    /**
-	     * Saves the current person data to the specified file.
-	     * 
-	     * @param file
-	     */
+	    //Enregistre les données dans le fichier spécifié.
 	    public void saveClientDataToFile(File file) {
 	        try {
 	            JAXBContext context = JAXBContext.newInstance(ClientListeEnregistrement.class);
 	            Marshaller m = context.createMarshaller();
 	            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-	            // Wrapping our person data.
+	            // enregistrement des données
 	            ClientListeEnregistrement wrapper = new ClientListeEnregistrement();
 	            wrapper.setClients(clientData);
-
-	            // Marshalling and saving XML to the file.
+	            // enregistrer XML dans le fichier.
 	            m.marshal(wrapper, file);
-
-	            // Save the file path to the registry.
+	            // Enregistre le chemin du fichier dans le registre.
 	            setClientFilePath(file);
-	        } catch (Exception e) { // catches ANY exception
+	        } catch (Exception e) { 
 	            Alert alert = new Alert(AlertType.ERROR);
 	            alert.setTitle("Erreur");
-	            alert.setHeaderText("Could not save data");
-	            alert.setContentText("Could not save data to file:\n" + file.getPath());
-
+	            alert.setHeaderText("Impossible d'enregistrer les données");
+	            alert.setContentText("Impossible d'enregistrer les données à partir de :\n" + file.getPath());
 	            alert.showAndWait();
 	        }
 	    }
@@ -440,22 +402,18 @@ import view.RootLayoutController;
 	            JAXBContext context2 = JAXBContext.newInstance(ProspectListeEnregistrement.class);
 	            Marshaller m2 = context2.createMarshaller();
 	            m2.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-	            // Wrapping our person data.
+	            // enregistrement des données
 	            ProspectListeEnregistrement wrapper2 = new ProspectListeEnregistrement();
 	            wrapper2.setProspects(prospectData);
-
-	            // Marshalling and saving XML to the file.
+	            // enregistrer XML dans le fichier.
 	            m2.marshal(wrapper2, file2);
-
-	            // Save the file path to the registry.
+	            // Enregistre le chemin du fichier dans le registre.
 	            setProspectFilePath(file2);
 	        } catch (Exception e) { // catches ANY exception
 	            Alert alert = new Alert(AlertType.ERROR);
 	            alert.setTitle("Erreur");
-	            alert.setHeaderText("Could not save data");
-	            alert.setContentText("Could not save data to file:\n" + file2.getPath());
-
+	            alert.setHeaderText("Impossible d'enregistrer les données");
+	            alert.setContentText("Impossible d'enregistrer les données à partir de :\n" + file2.getPath());
 	            alert.showAndWait();
 	        }
 	    }
@@ -464,22 +422,18 @@ import view.RootLayoutController;
 	            JAXBContext context3 = JAXBContext.newInstance(RepresentantListeEnregistrement.class);
 	            Marshaller m3 = context3.createMarshaller();
 	            m3.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-	            // Wrapping our person data.
+	            // enregistrement des données
 	            RepresentantListeEnregistrement wrapper3 = new RepresentantListeEnregistrement();
 	            wrapper3.setRepresentants(representantData);
-
-	            // Marshalling and saving XML to the file.
+	            // enregistrer XML dans le fichier.
 	            m3.marshal(wrapper3, file3);
-
-	            // Save the file path to the registry.
+	            // Enregistre le chemin du fichier dans le registre.
 	            setRepresentantFilePath(file3);
-	        } catch (Exception e) { // catches ANY exception
+	        } catch (Exception e) { 
 	            Alert alert = new Alert(AlertType.ERROR);
 	            alert.setTitle("Erreur");
-	            alert.setHeaderText("Could not save data");
-	            alert.setContentText("Could not save data to file:\n" + file3.getPath());
-
+	            alert.setHeaderText("Impossible d'enregistrer les données");
+	            alert.setContentText("Impossible d'enregistrer les données à partir de :\n" + file3.getPath());
 	            alert.showAndWait();
 	        }
 	    }

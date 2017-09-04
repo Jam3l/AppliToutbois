@@ -41,39 +41,28 @@ public class ClientOverviewController {
 	private TextField EnseigneRField;
 	private MainApp mainApp;
 	public static boolean presser;
-    /**
-     * The constructor.
-     * The constructor is called before the initialize() method.
-     */
+    
     public ClientOverviewController() {
     }
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
-     */
     @FXML
     private void initialize() {
+    	// initialise la table view 
         numClientColumn.setCellValueFactory(cellData -> cellData.getValue().numClientProperty());
         enseigneColumn.setCellValueFactory(cellData -> cellData.getValue().enseigneProperty());
         adresseColumn.setCellValueFactory(cellData -> cellData.getValue().adresseProperty());      
         showClientDetails(null);
-        // Listen for selection changes and show the person details when changed.
+        // Listener
         clientTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showClientDetails(newValue));
     }
-    /**
-     * Is called by the main application to give a reference back to itself.
-     * 
-     * @param mainApp
-     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        // Add observable list data to the table
+        // Ajouter des données a liste observables
         clientTable.setItems(mainApp.getClientData());
     }
+    //Details du client
     private void showClientDetails(Client client) {
         if (client != null) {
-            // Fill the labels with info from the person object.
             numClientLabel.setText(client.getNumClient());
             enseigneLabel.setText(client.getEnseigne());
             adresseLabel.setText(client.getAdresse());            
@@ -83,7 +72,6 @@ public class ClientOverviewController {
             numRepLabel.setText(client.getNumRep());
             numComLabel.setText(Integer.toString(client.getNumCom()));
         } else {
-            // Person is null, remove all the text.
             numClientLabel.setText("");
             enseigneLabel.setText("");
             adresseLabel.setText("");
@@ -94,6 +82,7 @@ public class ClientOverviewController {
             numComLabel.setText("");
         }
     }
+    //Recherche d un client
     @FXML
     private void handleRechercheClient(){
     	String enseigneR = EnseigneRField.getText();
@@ -103,13 +92,13 @@ public class ClientOverviewController {
     			i = mainApp.getClientData().size();
     		}
     }
+    // Suppression d un client
     @FXML
     private void handleDeleteClient() {
         int selectedIndex = clientTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             clientTable.getItems().remove(selectedIndex);
         } else {
-            // Nothing selected.
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Aucune séléction");
@@ -118,6 +107,7 @@ public class ClientOverviewController {
             alert.showAndWait();
         }
     }
+    // Création d un client
     @FXML 
     public void handleNewClient() {
         Client tempClient = new Client();
@@ -127,10 +117,7 @@ public class ClientOverviewController {
             mainApp.getClientData().add(tempClient);
         }
     }
-    /**
-     * Called when the user clicks the edit button. Opens a dialog to edit
-     * details for the selected person.
-     */
+    // Modification d un client
     @FXML
     private void handleEditPerson() {
         Client selectedPerson = clientTable.getSelectionModel().getSelectedItem();
@@ -141,7 +128,6 @@ public class ClientOverviewController {
                 showClientDetails(selectedPerson);
             }
         } else {
-            // Nothing selected.
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Pas de sélection");
@@ -150,6 +136,7 @@ public class ClientOverviewController {
             alert.showAndWait();
         }
     }
+    // Retour menu
     @FXML
 	public void handleMenu(){
     	File file = mainApp.getClientFilePath();
@@ -157,6 +144,7 @@ public class ClientOverviewController {
             mainApp.saveClientDataToFile(file);}
 		mainApp.showMenuPrincipale();
 	}
+    // methode pour savoir si l on a clique sur nouveau ou modifier
 	public static boolean isPresser() {
 		return presser;
 	}

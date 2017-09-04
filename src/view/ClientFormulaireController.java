@@ -47,37 +47,28 @@ public class ClientFormulaireController {
 	    public void setMainApp(MainApp mainApp) {
 	        this.mainApp = mainApp;
 	    }
-	    /**
-	     * Initializes the controller class. This method is automatically called
-	     * after the fxml file has been loaded.
-	     */
+	    // initialise la combobox type voie
 	    @FXML
 	    private void initialize() {
 	    	voieBox.getItems().setAll(TypeVoie.values());//on rempli la comboBox avec les valeurs de la classe enum "TypeVoie"
 	    }
-	    /**
-	     * Sets the stage of this dialog.
-	     *
-	     * @param dialogStage
-	     */
 	    public void setDialogStage(Stage dialogStage) {
 	        this.dialogStage = dialogStage;
-	        //decompte le numero de client qui a été créer si l'on ferme la fenetre
+	        //decompte le numero de client qui a été créer si l'on ferme la fenetre avec la croix
 	        dialogStage.setOnCloseRequest( event -> {
+	        	// Si on vient de prospect
 	        	if(ProspectOverviewController.devientClient == 1){
 	        		client.setClientCompteur(client.getClientCompteur()-1);
 	        	}
+	        	// Si on vient de client
 	        	ProspectOverviewController.devientClient = 0;
 	        	if(ClientOverviewController.isPresser() == true){
 	    		client.setClientCompteur(client.getClientCompteur()-1);
 	    	}});
 	    }
-	    /**
-	     * Sets the person to be edited in the dialog.
-	     *
-	     * @param person
-	     */
+	    // Définit le client à éditer dans la boîte de dialogue
 	    public void setClient(Client client) {
+	    	// Si on vient de prospect
 	    	if(ProspectOverviewController.devientClient == 1){
 	    		Client.clientCompteur ++;
 	    		this.client = client;
@@ -92,6 +83,7 @@ public class ClientFormulaireController {
 		        numRepClientField.setItems(mainApp.getRepresentantData()); 
 		        numRepClientField.setValue(ProspectOverviewController.selProspect.getRepCombo());
 		        numComField.setText("1");
+		    // Si on vient de client    
 	    	}else{
 	        	this.client = client;
 		        numClientField.setText(client.getNumClient());
@@ -114,11 +106,7 @@ public class ClientFormulaireController {
 		        numComField.setText(Integer.toString(client.getNumCom()));   
 	    	}
 	    }
-	    /**
-	     * Returns true if the user clicked OK, false otherwise.
-	     *
-	     * @return
-	     */
+	    // verifie si l on a cliquer sur ok
 	    public boolean isOkClicked() {
 	        return okClicked;
 	    }
@@ -149,10 +137,12 @@ public class ClientFormulaireController {
 	    @FXML
 	    private void handleCancel() {
 	    	//Decompte du compteur client si on appuie sur annuler
+	    	// Si l on vient de prospect
 	    	if(ProspectOverviewController.devientClient == 1){
         		client.setClientCompteur(client.getClientCompteur()-1);
         	}
 	    	ProspectOverviewController.devientClient = 0;
+	    	//si l on vient de client
 	    	if(ClientOverviewController.isPresser() == true){
 	    		client.setClientCompteur(client.getClientCompteur()-1);
 	    	}
@@ -169,6 +159,13 @@ public class ClientFormulaireController {
 	    //teste le numéro de tél
 	    public boolean isTelValid(){
 	    	if(Pattern.matches("^([.0-9]+)+$",telField.getText())){
+	    		return true;
+	    	}
+	    	else{return false;}
+	    }
+	    //teste le code postal
+	    public boolean isCPValid(){
+	    	if(Pattern.matches("^([0-9]+)+$",codePostal.getText())){
 	    		return true;
 	    	}
 	    	else{return false;}
@@ -214,7 +211,7 @@ public class ClientFormulaireController {
 	        if (nomRue.getText() == null || nomRue.getText().length() == 0) {
 		           errorMessage += "Nom de rue invalide!\n---------------\n";
 		        }
-	        if (codePostal.getText() == null || codePostal.getText().length() == 0) {
+	        if (codePostal.getText() == null || codePostal.getText().length() == 0 || isCPValid() == false) {
 		           errorMessage += "Code Postal invalide!\n---------------\n";
 		        }
 	        if (ville.getText() == null || ville.getText().length() == 0) {

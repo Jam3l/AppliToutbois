@@ -1,5 +1,7 @@
 package view;
 
+import java.util.regex.Pattern;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -86,8 +88,21 @@ public class RepresentantFormulaireController {
     	}
         dialogStage.close();
     }
-    
-  //vérifie si les champs sont valide
+    //teste le taux de commission
+    public boolean isTauxComValid(){
+    	if(Pattern.matches("^([.0-9]+)+$",tauxField.getText())){
+    		return true;
+    	}
+    	else{return false;}
+    }
+  //teste le salaire
+    public boolean isSalaireValid(){
+    	if(Pattern.matches("^([.0-9]+)+$",salaireField.getText())){
+    		return true;
+    	}
+    	else{return false;}
+    }
+    //vérifie si les champs sont valide
     private boolean isInputValid() {
         String errorMessage = "";
         if (numRepresentantField.getText() == null || numRepresentantField.getText().length() == 0) {
@@ -99,14 +114,12 @@ public class RepresentantFormulaireController {
         if (prenomField.getText() == null || prenomField.getText().length() == 0) {
             errorMessage += "Prénom invalide!\n";
         }
-        if (tauxField.getText() == null || tauxField.getText().length() == 0)  {
+        if (tauxField.getText() == null || tauxField.getText().length() == 0 ||  isTauxComValid() == false)  {
             errorMessage += "Taux de commission invalide!\n" ;
         } 
-        if (salaireField.getText() == null || salaireField.getText().length() == 0) {
+        if (salaireField.getText() == null || salaireField.getText().length() == 0 || isSalaireValid() == false) {
             errorMessage += "Salaire fixe Brut invalide!\n";
         } 
-
-
         if (errorMessage.length() == 0) {
             return true;
         } else {

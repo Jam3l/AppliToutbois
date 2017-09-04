@@ -13,7 +13,7 @@ public class Representant {
 	private final StringProperty tauxRepresentant;
 	private final StringProperty salaireRepresentant;
 	private static int representantCompteur;
-	
+	// Constructeur
 	public Representant() {
 		representantCompteur ++;
 		String numRepCompteur = Integer.toString(representantCompteur);
@@ -24,7 +24,7 @@ public class Representant {
 		this.tauxRepresentant = new SimpleStringProperty();
 		this.salaireRepresentant = new SimpleStringProperty();		
 	}
-	
+	// Getters et setters
 	public String getNumRepresentant() {return numRepresentant.get();}
 	public void setNumRepresentant(String numRepresentant) {this.numRepresentant.set(numRepresentant);}            
 	public StringProperty numRepresentantProperty() {return numRepresentant;}

@@ -20,7 +20,7 @@ public class Prospect {
 	private final StringProperty paysProspect;
 	private final StringProperty numRepProspect;
 	private final ObjectProperty<Representant> repCombo;
-	
+	//Constructeur
 	public Prospect(){
 		this.dateVisite = new SimpleObjectProperty<LocalDate>(LocalDate.now());
 		this.enseigneProspect = new SimpleStringProperty();
@@ -34,7 +34,7 @@ public class Prospect {
 		this.numRepProspect = new SimpleStringProperty();
 		this.repCombo = new SimpleObjectProperty<Representant>();
 	}
-	
+	// Getters et Setters
 	@XmlJavaTypeAdapter(LocalDateAdapter.class)
 	public LocalDate getDateVisite() {return dateVisite.get();}
 	public void setDateVisite(LocalDate dateVisite) {this.dateVisite.set(dateVisite);}            

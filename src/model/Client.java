@@ -26,16 +26,16 @@ public class Client {
 	private final IntegerProperty numCom;
 	private final ObjectProperty<Representant> repComboC;
 	public static int clientCompteur;
-	
+	// Constructeur client
 	public Client() {
-		clientCompteur ++;
-		String numCompteur = Integer.toString(clientCompteur);
-		numCli = "C" + numCompteur;
+		clientCompteur ++;// Compteur pour l'incrementation du numero de client
+		String numCompteur = Integer.toString(clientCompteur);// parse de int en string
+		numCli = "C" + numCompteur; // concatenation du numero avec une lettre
 		this.numClient = new SimpleStringProperty(numCli);
 		this.enseigne = new SimpleStringProperty();
 		this.adresse = new SimpleStringProperty();
 		this.numeroRue = new SimpleStringProperty();
-		this.voieBox = new SimpleStringProperty();
+		this.voieBox = new SimpleStringProperty(); 
 		this.nomRue = new SimpleStringProperty();
 		this.codePostal = new SimpleStringProperty();
 		this.ville = new SimpleStringProperty();
@@ -47,6 +47,7 @@ public class Client {
 		this.numCom = new SimpleIntegerProperty();
 		this.repComboC = new SimpleObjectProperty<Representant>();
 	}
+	// Getters et Setters
 	public String getNumClient() {return numClient.get();}
 	public void setNumClient(String numClient) {this.numClient.set(numClient);}            
 	public StringProperty numClientProperty() {return numClient;}
