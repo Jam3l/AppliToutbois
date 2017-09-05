@@ -9,20 +9,17 @@ import main.MainApp;
 import view.MenuPrincipaleController;
 
 public class RootLayoutController {
-	// Reference to the main application
+	
+	// Fait référence au MainApp
     private MainApp mainApp;
-    /**
-     * Is called by the main application to give a reference back to itself.
-     * 
-     * @param mainApp
-     */
+
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
-    /**
-     * Creates an empty address book.
-     */
+    
+     
+    // Permet de créer une nouvelle fenêtre vierge.
     @FXML
     private void handleNouveau() {
     	
@@ -30,19 +27,18 @@ public class RootLayoutController {
         mainApp.setClientFilePath(null);
     }
 
-    /**
-     * Opens a FileChooser to let the user select an address book to load.
-     */
+
+    // Ouvrir un nouveau fichier.
     @FXML
     private void handleOuvrir() {
         FileChooser fileChooser = new FileChooser();
 
-        // Set extension filter
+        // Définit l'extension de fichier
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
                 "XML files (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extFilter);
 
-        // Show save file dialog
+        // Affiche la boîte de dialogue d'enregistrement de fichiers
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
 
         if (file != null) {
@@ -56,10 +52,9 @@ public class RootLayoutController {
         
     }
 
-    /**
-     * Saves the file to the person file that is currently open. If there is no
-     * open file, the "save as" dialog is shown.
-     */
+
+    // Sauvegarder le fichier en cours.
+    // Si aucun fichier est ouvert, la méthode SauvegarderSous est lancée.
     @FXML
     private void handleSauvegarder() {
     	if(MenuPrincipaleController.a == 1){
@@ -89,23 +84,22 @@ public class RootLayoutController {
     	
     }
 
-    /**
-     * Opens a FileChooser to let the user select a file to save to.
-     */
+
+    // Sauvegarder les données sous un nouveau fichier.
     @FXML
     private void handleSauvegarderSous() {
     	
         FileChooser fileChooser = new FileChooser();
 
-        // Set extension filter
+        // Définit l'extension de fichier
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
                 "XML files (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extFilter);
         if(MenuPrincipaleController.a == 1){
-	        // Show save file dialog
+	        // Affiche la boîte de dialogue d'enregistrement de fichiers
 	        File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
 	        if (file != null) {
-	            // Make sure it has the correct extension
+	            // Vérification de la bonne extension .xml
 	            if (!file.getPath().endsWith(".xml")) {
 	                file = new File(file.getPath() + ".xml");
 	            }
@@ -113,20 +107,20 @@ public class RootLayoutController {
             }
         }
         if(MenuPrincipaleController.a == 2){
-        	// Show save file dialog
+        	// Définit l'extension de fichier
 	        File file2 = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
 	        if (file2 != null) {
-                // Make sure it has the correct extension
+                // Vérification de la bonne extension .xml
                 if (!file2.getPath().endsWith(".xml")) {
                     file2 = new File(file2.getPath() + ".xml");
                 }
 	        }
             mainApp.saveProspectDataToFile(file2);}
         if(MenuPrincipaleController.a == 3){
-        	// Show save file dialog
+        	//  Définit l'extension de fichier
 	        File file3 = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
 	        if (file3 != null) {
-                // Make sure it has the correct extension
+                // Vérification de la bonne extension .xml
                 if (!file3.getPath().endsWith(".xml")) {
                     file3 = new File(file3.getPath() + ".xml");
                 }
@@ -135,9 +129,8 @@ public class RootLayoutController {
         }
     }
 
-    /**
-     * Opens an about dialog.
-     */
+
+     // Ouvre la boite de dialogue "Help/About".
     @FXML
     private void handleAbout() {
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -148,9 +141,8 @@ public class RootLayoutController {
         alert.showAndWait();
     }
 
-    /**
-     * Closes the application.
-     */
+  
+    // Quitte l'application.
     @FXML
     private void handleQuitter() {
         System.exit(0);

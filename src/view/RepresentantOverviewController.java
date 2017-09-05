@@ -40,28 +40,25 @@ public class RepresentantOverviewController {
 	private Label salaireRepresentantLabel;
 	
 	@FXML
-	private TextField RepresentantRField;		// utilisé dans la barre de recherche
+	private TextField RepresentantRField;		// Textfield utilisé pour la barre de recherche
 	private MainApp mainApp;
-	public static boolean presser;
-	  /**
-     * The constructor.
-     * The constructor is called before the initialize() method.
-     */
+	public static boolean presser;				// Pour différencer de l'action "Nouveau" ou "Modifier"
+	
+	
     public RepresentantOverviewController() {
+    	
     }
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
-     */
+ 
     @FXML
     private void initialize() {
+    	// Chargement des 3 colonnes de la tableView
     	numRepresentantColumn.setCellValueFactory(cellData -> cellData.getValue().numRepresentantProperty());
     	nomRepresentantColumn.setCellValueFactory(cellData -> cellData.getValue().nomRepresentantProperty());
     	prenomRepresentantColumn.setCellValueFactory(cellData -> cellData.getValue().prenomRepresentantProperty());   
 
      
         showRepresentantDetails(null);
-        // Listen for selection changes and show the person details when changed.
+        // Affiche les détails de la ligne sélectionnée dans la fenêtre de détail.
        representantTable.getSelectionModel().selectedItemProperty().addListener(
              (observable, oldValue, newValue) -> showRepresentantDetails(newValue));    	
     }
@@ -77,7 +74,7 @@ public class RepresentantOverviewController {
     }
     private void showRepresentantDetails(Representant representant) {
         if (representant != null) {
-            // Fill the labels with info from the person object.
+            // Remplit les labels avec les informations de l'objet représentants.
         	numRepresentantLabel.setText(representant.getNumRepresentant());
         	nomRepresentantLabel.setText(representant.getNomRepresentant());
         	prenomRepresentantLabel.setText(representant.getPrenomRepresentant());
@@ -85,7 +82,7 @@ public class RepresentantOverviewController {
         	salaireRepresentantLabel.setText(representant.getSalaireRepresentant());
            
         } else {
-            // Person is null, remove all the text.
+            // Si aucune ligne n'est sélectionnée, les labels sont vides.
         	numRepresentantLabel.setText("");
         	nomRepresentantLabel.setText("");
         	prenomRepresentantLabel.setText("");
@@ -95,6 +92,7 @@ public class RepresentantOverviewController {
         }
     }
     
+    // Recherche d'un représentant
     @FXML
     private void handleRechercheRepresentant(){
     	String RepresentantR = RepresentantRField.getText();
@@ -105,13 +103,14 @@ public class RepresentantOverviewController {
     		}
     }
     
+    // Suppression d'un représentant
     @FXML
     private void handleDeleteRepresentant() {
         int selectedIndex = representantTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             representantTable.getItems().remove(selectedIndex);
         } else {
-            // Nothing selected.
+            // Si aucune ligne sélectionné, message d'erreur.
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Aucune séléction");
@@ -121,6 +120,7 @@ public class RepresentantOverviewController {
         }
     }
     
+    // Création d'un nouveau représentant
     @FXML
     private void handleNewRepresentant() {
         Representant tempRepresentant = new Representant();
@@ -130,10 +130,8 @@ public class RepresentantOverviewController {
             mainApp.getRepresentantData().add(tempRepresentant);
         }
     }
-    /**
-     * Called when the user clicks the edit button. Opens a dialog to edit
-     * details for the selected person.
-     */
+
+    // Bouton Modifier correspondant à la ligne sélectionnée
     @FXML
     private void handleEditPerson() {
         Representant selectedPerson = representantTable.getSelectionModel().getSelectedItem();
@@ -144,7 +142,7 @@ public class RepresentantOverviewController {
                 showRepresentantDetails(selectedPerson);
             }
         } else {
-            // Nothing selected.
+            // Si aucune ligne sélectionné, message d'erreur.
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Pas de sélection");
@@ -154,6 +152,7 @@ public class RepresentantOverviewController {
         }
     }  
     
+    // Bouton Menu permettant de revenir sur la page principal
     @FXML
   	public void handleMenu(){
     	File file3 = mainApp.getRepresentantFilePath();

@@ -1,7 +1,5 @@
 package view;
 
-import java.util.regex.Pattern;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -25,30 +23,22 @@ public class RepresentantFormulaireController {
     private Stage dialogStage;
     private Representant representant;
     private boolean okClicked = false;   
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the fxml file has been loaded.
-     */    
+ 
+    
     @FXML
     private void initialize() {
     }
-    /**
-     * Sets the stage of this dialog.
-     *
-     * @param dialogStage
-     */
+    
+    // Affiche la fenêtre formulaire
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
-        //decompte le numero de client qui a été créer si l'on ferme la fenetre
+        //Décompte le numero de client qui a été créer si l'on ferme la fenetre
         dialogStage.setOnCloseRequest( event -> {if(RepresentantOverviewController.isPresser() == true){
     		representant.setRepresentantCompteur(representant.getRepresentantCompteur()-1);
     	}});
     }
-    /**
-     * Sets the person to be edited in the dialog.
-     *
-     * @param person
-     */
+   
+    // Récupère les données du formulaire pour les inscrire dans la Table Représentant
     public void setRepresentant(Representant representant) {
         this.representant = representant;
         numRepresentantField.setText(representant.getNumRepresentant());
@@ -58,15 +48,13 @@ public class RepresentantFormulaireController {
         salaireField.setText(representant.getSalaireRepresentant());
  
     }
-    /**
-     * Returns true if the user clicked OK, false otherwise.
-     *
-     * @return
-     */
+   
+    // Retourne true si l'utilisateur a cliqué sur OK
     public boolean isOkClicked() {
         return okClicked;
     }
-    //action bouton OK
+    
+    //Bouton OK
     @FXML
     private void handleOk() {
         if (isInputValid()) {
@@ -80,7 +68,7 @@ public class RepresentantFormulaireController {
             dialogStage.close();
         }
     }
-    //action bouton annuler
+    //Bouton annuler
     @FXML
     private void handleCancel() {
     	if(RepresentantOverviewController.isPresser() == true){
@@ -88,21 +76,8 @@ public class RepresentantFormulaireController {
     	}
         dialogStage.close();
     }
-    //teste le taux de commission
-    public boolean isTauxComValid(){
-    	if(Pattern.matches("^([.0-9]+)+$",tauxField.getText())){
-    		return true;
-    	}
-    	else{return false;}
-    }
-  //teste le salaire
-    public boolean isSalaireValid(){
-    	if(Pattern.matches("^([.0-9]+)+$",salaireField.getText())){
-    		return true;
-    	}
-    	else{return false;}
-    }
-    //vérifie si les champs sont valide
+    
+  //Vérifie si les champs sont valides et non vide
     private boolean isInputValid() {
         String errorMessage = "";
         if (numRepresentantField.getText() == null || numRepresentantField.getText().length() == 0) {
@@ -114,12 +89,14 @@ public class RepresentantFormulaireController {
         if (prenomField.getText() == null || prenomField.getText().length() == 0) {
             errorMessage += "Prénom invalide!\n";
         }
-        if (tauxField.getText() == null || tauxField.getText().length() == 0 ||  isTauxComValid() == false)  {
+        if (tauxField.getText() == null || tauxField.getText().length() == 0)  {
             errorMessage += "Taux de commission invalide!\n" ;
         } 
-        if (salaireField.getText() == null || salaireField.getText().length() == 0 || isSalaireValid() == false) {
+        if (salaireField.getText() == null || salaireField.getText().length() == 0) {
             errorMessage += "Salaire fixe Brut invalide!\n";
         } 
+
+
         if (errorMessage.length() == 0) {
             return true;
         } else {

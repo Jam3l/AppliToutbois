@@ -38,24 +38,26 @@ public class ProspectOverviewController {
 	
 	public ProspectOverviewController(){
 	}
+	
 	@FXML
 	private void initialize() {
 		dateVisiteColumn.setCellValueFactory(cellData -> cellData.getValue().dateVisiteProperty());
 		enseignePropectColumn.setCellValueFactory(cellData -> cellData.getValue().enseigneProspectProperty());
 	    numRepProspectColumn.setCellValueFactory(cellData -> cellData.getValue().numRepProspectProperty());      
 	    showProspectDetails(null);
-	    // Listen for selection changes and show the person details when changed.
+	    // Affiche les détails de la ligne sélectionnée dans la fenêtre de détail.
         prospectTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showProspectDetails(newValue));
 	}
+	
 	private void showProspectDetails(Prospect prospect) {
         if (prospect != null) {
-            // Fill the labels with info from the person object.
+            // Remplit les labels avec les informations de l'objet représentants.
             dateVisiteLabel.setText(Calendrier.format(prospect.getDateVisite()));
             enseigneProspectLabel.setText(prospect.getEnseigneProspect());
             adressePropectLabel.setText(prospect.getAdresseProspect());
             numRepProspectLabel.setText(prospect.getNumRepProspect());
         } else {
-            // Person is null, remove all the text.
+            // Si aucune ligne n'est sélectionnée, les labels sont vides.
         	dateVisiteLabel.setText("");
             enseigneProspectLabel.setText("");
             adressePropectLabel.setText("");
@@ -66,13 +68,15 @@ public class ProspectOverviewController {
         this.mainApp = mainApp;
         prospectTable.setItems(mainApp.getProspectData());
 	}
+	
+	// Suppression d'un prospect
 	@FXML
     private void handleDeleteProspect() {
         int selectedIndex = prospectTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             prospectTable.getItems().remove(selectedIndex);
         } else {
-            // Nothing selected.
+            // Si aucune ligne sélectionné, message d'erreur.
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Aucune séléction");
@@ -81,6 +85,8 @@ public class ProspectOverviewController {
             alert.showAndWait();
         }
     }
+	
+	// Création d'un nouveau prospect
     @FXML
     private void handleNewProspect() {
         Prospect tempProspect = new Prospect();
@@ -89,10 +95,8 @@ public class ProspectOverviewController {
             mainApp.getProspectData().add(tempProspect);
         }
     }
-    /**
-     * Called when the user clicks the edit button. Opens a dialog to edit
-     * details for the selected person.
-     */
+    
+    // Bouton Modifier correspondant à la ligne sélectionnée
     @FXML
     private void handleEditProspect() {
         Prospect selectedProspect = prospectTable.getSelectionModel().getSelectedItem();
@@ -102,7 +106,7 @@ public class ProspectOverviewController {
                 showProspectDetails(selectedProspect);
             }
         } else {
-            // Nothing selected.
+        	// Si aucune ligne sélectionné, message d'erreur.
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Pas de sélection");
@@ -112,6 +116,7 @@ public class ProspectOverviewController {
         }
     }
 	
+    // Bouton Menu permettant de revenir sur la page principal
 	@FXML
 	public void handleMenu(){
 		File file2 = mainApp.getProspectFilePath();
@@ -120,6 +125,7 @@ public class ProspectOverviewController {
 		mainApp.showMenuPrincipale();
 	}
 	
+	// Permet de transformer un Prospect en Client
 	@FXML
 	public void handleDevientClient(){
 		selProspect = prospectTable.getSelectionModel().getSelectedItem();
@@ -143,7 +149,7 @@ public class ProspectOverviewController {
 	            
 	        }
 		} else {
-            // Nothing selected.
+			// Si aucune ligne sélectionné, message d'erreur.
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Pas de sélection");

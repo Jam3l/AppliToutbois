@@ -71,7 +71,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label text="N° de commandes :" GridPane.rowIndex="7">
+                                    <Label text="Nombre de Commandes" GridPane.rowIndex="7">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -171,9 +171,9 @@
                <children>
                   <TableView fx:id="clientTable" prefHeight="292.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="numClientColumn" minWidth="300.0" prefWidth="300.0" text="N° Client" />
-                      <TableColumn fx:id="enseigneColumn" minWidth="300.0" prefWidth="300.0" text="Enseigne" />
-                        <TableColumn fx:id="adresseColumn" minWidth="300.0" prefWidth="300.0" text="Adresse" />
+                      <TableColumn fx:id="numClientColumn" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="N° Client" />
+                      <TableColumn fx:id="enseigneColumn" maxWidth="350.0" minWidth="250.0" prefWidth="300.0" text="Enseigne" />
+                        <TableColumn fx:id="adresseColumn" minWidth="450.0" prefWidth="500.0" text="Adresse" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

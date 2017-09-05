@@ -9,7 +9,7 @@
    <top>
       <MenuBar prefHeight="29.0" prefWidth="775.0" styleClass="label" stylesheets="@DarkTheme2.css" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Fichier">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#handleNouveau" text="Nouveau" />
                   <MenuItem mnemonicParsing="false" onAction="#handleOuvrir" text="Ouvrir..." />
@@ -18,14 +18,10 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleQuitter" text="Quitter" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Edit" />
+          <Menu mnemonicParsing="false" text="Aide">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="À Propos" />
             </items>
           </Menu>
         </menus>
