@@ -56,7 +56,7 @@ import view.RootLayoutController;
 	    public void start(Stage primaryStage) {
 	        this.primaryStage = primaryStage;
 	        this.primaryStage.setTitle("Toutbois");
-	        this.primaryStage.getIcons().add(new Image("file:Images/Dragon.png"));//icone de l'appli  
+	        this.primaryStage.getIcons().add(new Image("/view/Images/Dragon.png"));//icone de l'appli  
 	        // chargement du root layout
 	        initRootLayout();
 	        // chargement des fichiers xml de sauvegarde

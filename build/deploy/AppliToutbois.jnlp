@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="AppliToutbois.jnlp">
+  <information>
+    <title>AppliToutbois</title>
+    <vendor>MikaJamal</vendor>
+    <description>AppliToutbois</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="AppliToutbois.jar" size="2904965" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="0" height="0" main-class="main.MainApp"  name="AppliToutbois" />
+  <update check="background"/>
+</jnlp>
