@@ -52,19 +52,19 @@ public class ProspectFormulaireController {
     // Définit le prospect à éditer dans la boîte de dialogue
     public void setProspect(Prospect prospect) {
     	this.prospect = prospect;
-        enseigneProspectField.setText(prospect.getEnseigneProspect());
+        enseigneProspectField.setText(prospect.getEnseigne());	// Modif Jamel (supression de la mention Prospect)
         datePicker.setValue(prospect.getDateVisite());
-        numeroRueProspectField.setText(prospect.getNumeroRueProspect());
-        if (prospect.getVoieBoxProspect()!=null){ 
-        voieBoxProspectField.setValue(TypeVoie.valueOf(prospect.getVoieBoxProspect()));
+        numeroRueProspectField.setText(prospect.getNumeroRue());
+        if (prospect.getVoieBox()!=null){ 
+        voieBoxProspectField.setValue(TypeVoie.valueOf(prospect.getVoieBox()));
         }else{        
 	        voieBoxProspectField.setValue(TypeVoie.rue);
         }
-        nomRueProspectField.setText(prospect.getNomRueProspect());
-        codePostalProspectField.setText(prospect.getCodePostalProspect());
-        villeProspectField.setText(prospect.getVilleProspect());
-        paysProspectField.setText(prospect.getPaysProspect());
-        numRepProspectField.setValue(prospect.getRepCombo());
+        nomRueProspectField.setText(prospect.getNomRue());
+        codePostalProspectField.setText(prospect.getCodePostal());
+        villeProspectField.setText(prospect.getVille());
+        paysProspectField.setText(prospect.getPays());
+        numRepProspectField.setValue(prospect.getRepComboC());
         numRepProspectField.setItems(mainApp.getRepresentantData()); 
     }
 	public boolean isOkClicked() {
@@ -75,16 +75,16 @@ public class ProspectFormulaireController {
     private void handleOk() {
         if (isInputValid()) {
         	prospect.setDateVisite(datePicker.getValue());
-        	prospect.setEnseigneProspect(enseigneProspectField.getText());
-        	prospect.setNumeroRueProspect(numeroRueProspectField.getText());		           
-        	prospect.setVoieBoxProspect(voieBoxProspectField.getValue().toString());
-	        prospect.setNomRueProspect(nomRueProspectField.getText());
-	        prospect.setCodePostalProspect(codePostalProspectField.getText());
-	        prospect.setVilleProspect(villeProspectField.getText());
-	        prospect.setPaysProspect(paysProspectField.getText());	            
-	        prospect.setAdresseProspect(prospect.getNumeroRueProspect()+" "+voieBoxProspectField.getValue().toString()+" "+prospect.getNomRueProspect()+" "+prospect.getCodePostalProspect()+" "+prospect.getVilleProspect()+" "+prospect.getPaysProspect());
-        	prospect.setNumRepProspect(numRepProspectField.getValue().getNumRepresentant().toString());
-        	prospect.setRepCombo(numRepProspectField.getValue());
+        	prospect.setEnseigne(enseigneProspectField.getText());	// Modif Jamel (supression de la mention Prospect)
+        	prospect.setNumeroRue(numeroRueProspectField.getText());		           
+        	prospect.setVoieBox(voieBoxProspectField.getValue().toString());
+	        prospect.setNomRue(nomRueProspectField.getText());
+	        prospect.setCodePostal(codePostalProspectField.getText());
+	        prospect.setVille(villeProspectField.getText());
+	        prospect.setPays(paysProspectField.getText());	            
+	        prospect.setAdresse(prospect.getNumeroRue()+" "+voieBoxProspectField.getValue().toString()+" "+prospect.getNomRue()+" "+prospect.getCodePostal()+" "+prospect.getVille()+" "+prospect.getPays());
+        	prospect.setNumRep(numRepProspectField.getValue().getNumRepresentant().toString());
+        	prospect.setRepComboC(numRepProspectField.getValue());
             okClicked = true;
             dialogStageP.close();
         }

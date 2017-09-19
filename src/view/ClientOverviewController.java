@@ -1,10 +1,15 @@
 package view;
 
 import java.io.File;
+import java.util.Optional;
+
+import javax.swing.plaf.basic.BasicDesktopIconUI.MouseInputHandler;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -88,9 +93,10 @@ public class ClientOverviewController {
     	String enseigneR = EnseigneRField.getText();
     	for(int i = 0;i < mainApp.getClientData().size();i++)
     		if(mainApp.getClientData().get(i).getEnseigne().toLowerCase().equals(enseigneR.toLowerCase())){
-    			showClientDetails(mainApp.getClientData().get(i));
-    			i = mainApp.getClientData().size();
-    		}
+    			showClientDetails(mainApp.getClientData().get(i));    			
+    			clientTable.getSelectionModel().select(mainApp.getClientData().get(i));		// Surligne la ligne de l'enseigne trouvé
+    		}    	
+    	EnseigneRField.setText("");
     }
     // Suppression d un client
     @FXML
@@ -141,9 +147,32 @@ public class ClientOverviewController {
 	public void handleMenu(){
     	File file = mainApp.getClientFilePath();
         if (file != null) {
-            mainApp.saveClientDataToFile(file);}
-		mainApp.showMenuPrincipale();
+        	
+        	Alert alert = new Alert(AlertType.CONFIRMATION);
+        	alert.setTitle("Retour au menu principal");
+        	alert.setHeaderText("Voulez-vous sauvegarder");        		        	
+        	ButtonType buttonTypeOne = new ButtonType("OUI");
+        	ButtonType buttonTypeTwo = new ButtonType("NON");
+        	
+        	alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
+
+        	Optional<ButtonType> result = alert.showAndWait();
+        	
+        	if (result.get() == buttonTypeOne){
+        		mainApp.saveClientDataToFile(file);
+        		mainApp.showMenuPrincipale();
+        	    
+        	} else if (result.get() == buttonTypeTwo) {
+        		mainApp.showMenuPrincipale();
+        	} 
+        	
+        } 
+        
 	}
+    
+    
+    
+    
     // methode pour savoir si l on a clique sur nouveau ou modifier
 	public static boolean isPresser() {
 		return presser;

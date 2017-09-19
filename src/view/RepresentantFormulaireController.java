@@ -2,10 +2,12 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.Representant;
+import model.TypeVoie;
 
 public class RepresentantFormulaireController {
 	
@@ -15,6 +17,22 @@ public class RepresentantFormulaireController {
     private TextField nomField;
     @FXML
     private TextField prenomField;
+    @FXML
+    private TextField numeroRueField;
+    @FXML
+    private ComboBox<TypeVoie> voieBox;
+    @FXML
+    private TextField nomRueField;
+    @FXML
+    private TextField codePostalField;
+    @FXML
+    private TextField villeField;
+    @FXML
+    private TextField paysField;	    
+    @FXML
+    private TextField emailField;
+    @FXML
+    private TextField telField;
     @FXML
     private TextField tauxField;
     @FXML
@@ -27,6 +45,7 @@ public class RepresentantFormulaireController {
     
     @FXML
     private void initialize() {
+    	voieBox.getItems().setAll(TypeVoie.values());//on rempli la comboBox avec les valeurs de la classe enum "TypeVoie"
     }
     
     // Affiche la fenêtre formulaire
@@ -44,6 +63,20 @@ public class RepresentantFormulaireController {
         numRepresentantField.setText(representant.getNumRepresentant());
         nomField.setText(representant.getNomRepresentant());
         prenomField.setText(representant.getPrenomRepresentant());
+        
+        numeroRueField.setText(representant.getNumeroRue());
+        if (representant.getVoieBox()!=null){        
+        	voieBox.setValue(TypeVoie.valueOf(representant.getVoieBox()));
+        }else{        
+	        voieBox.setValue(TypeVoie.rue);
+        }
+        nomRueField.setText(representant.getNomRue());
+        codePostalField.setText(representant.getCodePostal());
+        villeField.setText(representant.getVille());
+        paysField.setText(representant.getPays());
+        emailField.setText(representant.getEmail());
+        telField.setText(representant.getTel());
+        
         tauxField.setText(representant.getTauxRepresentant());
         salaireField.setText(representant.getSalaireRepresentant());
  
@@ -60,7 +93,19 @@ public class RepresentantFormulaireController {
         if (isInputValid()) {
         	representant.setNumRepresentant(numRepresentantField.getText());
         	representant.setNomRepresentant(nomField.getText());
-        	representant.setPrenomRepresentant(prenomField.getText());
+        	representant.setPrenomRepresentant(prenomField.getText());        	
+        	representant.setNumeroRue(numeroRueField.getText());		           
+        	representant.setVoieBox(voieBox.getValue().toString());
+        	representant.setNomRue(nomRueField.getText());
+        	representant.setCodePostal(codePostalField.getText());
+        	representant.setVille(villeField.getText());
+        	representant.setPays(paysField.getText());
+        	
+        	representant.setAdresse(representant.getNumeroRue()+" "+voieBox.getValue().toString()+" "+representant.getNomRue()+" "
+        							+representant.getCodePostal()+" "+representant.getVille()+" "+representant.getPays());
+        	
+        	representant.setEmail(emailField.getText());
+        	representant.setTel(telField.getText());        	
         	representant.setTauxRepresentant(tauxField.getText());
         	representant.setSalaireRepresentant(salaireField.getText());
     

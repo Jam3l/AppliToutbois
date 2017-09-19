@@ -73,15 +73,15 @@ public class ClientFormulaireController {
 	    		Client.clientCompteur ++;
 	    		this.client = client;
 	    		numClientField.setText(client.getNumClient());
-		    	enseigneField.setText(ProspectOverviewController.selProspect.getEnseigneProspect()); 
-		    	numeroRue.setText(ProspectOverviewController.selProspect.getNumeroRueProspect());
-		    	voieBox.setValue(TypeVoie.valueOf(ProspectOverviewController.selProspect.getVoieBoxProspect()));
-		    	nomRue.setText(ProspectOverviewController.selProspect.getNomRueProspect());
-		        codePostal.setText(ProspectOverviewController.selProspect.getCodePostalProspect());
-		        ville.setText(ProspectOverviewController.selProspect.getVilleProspect());
-		        pays.setText(ProspectOverviewController.selProspect.getPaysProspect());
+		    	enseigneField.setText(ProspectOverviewController.selProspect.getEnseigne()); 		// Modif Jamel (supression de la mention Prospect)
+		    	numeroRue.setText(ProspectOverviewController.selProspect.getNumeroRue());			
+		    	voieBox.setValue(TypeVoie.valueOf(ProspectOverviewController.selProspect.getVoieBox()));
+		    	nomRue.setText(ProspectOverviewController.selProspect.getNomRue());
+		        codePostal.setText(ProspectOverviewController.selProspect.getCodePostal());
+		        ville.setText(ProspectOverviewController.selProspect.getVille());
+		        pays.setText(ProspectOverviewController.selProspect.getPays());
 		        numRepClientField.setItems(mainApp.getRepresentantData()); 
-		        numRepClientField.setValue(ProspectOverviewController.selProspect.getRepCombo());
+		        numRepClientField.setValue(ProspectOverviewController.selProspect.getRepComboC());
 		        numComField.setText("1");
 		    // Si on vient de client    
 	    	}else{

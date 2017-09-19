@@ -2,9 +2,11 @@ package view;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,6 +27,8 @@ public class ProspectOverviewController {
 	@FXML
 	private TableColumn<Prospect,String>enseignePropectColumn;
 	@FXML
+	private TableColumn<Prospect,String>AdressePropectColumn;
+	@FXML
 	private Label dateVisiteLabel;
 	@FXML
 	private Label enseigneProspectLabel;
@@ -42,8 +46,9 @@ public class ProspectOverviewController {
 	@FXML
 	private void initialize() {
 		dateVisiteColumn.setCellValueFactory(cellData -> cellData.getValue().dateVisiteProperty());
-		enseignePropectColumn.setCellValueFactory(cellData -> cellData.getValue().enseigneProspectProperty());
-	    numRepProspectColumn.setCellValueFactory(cellData -> cellData.getValue().numRepProspectProperty());      
+		enseignePropectColumn.setCellValueFactory(cellData -> cellData.getValue().enseigneProperty());
+	    numRepProspectColumn.setCellValueFactory(cellData -> cellData.getValue().numRepProperty());      
+	    AdressePropectColumn.setCellValueFactory(cellData -> cellData.getValue().adresseProperty()); 
 	    showProspectDetails(null);
 	    // Affiche les détails de la ligne sélectionnée dans la fenêtre de détail.
         prospectTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showProspectDetails(newValue));
@@ -53,9 +58,9 @@ public class ProspectOverviewController {
         if (prospect != null) {
             // Remplit les labels avec les informations de l'objet représentants.
             dateVisiteLabel.setText(Calendrier.format(prospect.getDateVisite()));
-            enseigneProspectLabel.setText(prospect.getEnseigneProspect());
-            adressePropectLabel.setText(prospect.getAdresseProspect());
-            numRepProspectLabel.setText(prospect.getNumRepProspect());
+            enseigneProspectLabel.setText(prospect.getEnseigne());
+            adressePropectLabel.setText(prospect.getAdresse());
+            numRepProspectLabel.setText(prospect.getNumRep());
         } else {
             // Si aucune ligne n'est sélectionnée, les labels sont vides.
         	dateVisiteLabel.setText("");
@@ -121,8 +126,25 @@ public class ProspectOverviewController {
 	public void handleMenu(){
 		File file2 = mainApp.getProspectFilePath();
         if (file2 != null) {
-            mainApp.saveProspectDataToFile(file2);}
-		mainApp.showMenuPrincipale();
+        	
+        }
+        	Alert alert = new Alert(AlertType.CONFIRMATION);
+        	alert.setTitle("Retour au menu principal");
+        	alert.setHeaderText("Voulez-vous sauvegarder");        		        	
+        	ButtonType buttonTypeOne = new ButtonType("OUI");
+        	ButtonType buttonTypeTwo = new ButtonType("NON");
+        	
+        	alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
+
+        	Optional<ButtonType> result = alert.showAndWait();
+        	
+        	if (result.get() == buttonTypeOne){
+        		mainApp.saveProspectDataToFile(file2);
+        		mainApp.showMenuPrincipale();
+        	    
+        	} else if (result.get() == buttonTypeTwo) {
+        		mainApp.showMenuPrincipale();
+        	} 
 	}
 	
 	// Permet de transformer un Prospect en Client

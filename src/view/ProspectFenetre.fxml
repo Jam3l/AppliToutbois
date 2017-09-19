@@ -93,9 +93,10 @@
                <children>
                   <TableView fx:id="prospectTable" editable="true" prefHeight="292.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                        <TableColumn fx:id="enseignePropectColumn" minWidth="300.0" prefWidth="300.0" text="Enseigne" />
-                      <TableColumn fx:id="numRepProspectColumn" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" text="N° Représentant" />
-                      <TableColumn fx:id="dateVisiteColumn" minWidth="300.0" prefWidth="300.0" text="Date de visite" />
+                        <TableColumn fx:id="enseignePropectColumn" minWidth="200.0" prefWidth="200.0" text="Enseigne" />
+                        <TableColumn fx:id="AdressePropectColumn" minWidth="300.0" prefWidth="300.0" text="Adresse" />
+                      <TableColumn fx:id="numRepProspectColumn" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="N° Représentant" />
+                      <TableColumn fx:id="dateVisiteColumn" minWidth="200.0" prefWidth="200.0" text="Date de visite" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

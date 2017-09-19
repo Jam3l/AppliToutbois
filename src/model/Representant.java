@@ -4,7 +4,7 @@ package model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Representant {
+public class Representant extends Personne {
 	
 	private String numRep;	// numéro unique pour chaque représentants
 	private final StringProperty numRepresentant;
@@ -13,8 +13,11 @@ public class Representant {
 	private final StringProperty tauxRepresentant;
 	private final StringProperty salaireRepresentant;
 	private static int representantCompteur;
+	
 	// Constructeur
 	public Representant() {
+		super();
+		
 		representantCompteur ++;
 		String numRepCompteur = Integer.toString(representantCompteur);
 		numRep = "R" + numRepCompteur;
@@ -24,6 +27,7 @@ public class Representant {
 		this.tauxRepresentant = new SimpleStringProperty();
 		this.salaireRepresentant = new SimpleStringProperty();		
 	}
+	
 	// Getters et setters
 	public String getNumRepresentant() {return numRepresentant.get();}
 	public void setNumRepresentant(String numRepresentant) {this.numRepresentant.set(numRepresentant);}            

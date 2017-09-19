@@ -158,6 +158,7 @@ import view.RootLayoutController;
 	            // Creation du stage.
 	            Stage dialogStage = new Stage();
 	            dialogStage.setTitle("Formulaire client");
+	            dialogStage.getIcons().add(new Image("/view/Images/Dragon.png"));//icone de l'appli  
 	            dialogStage.initModality(Modality.WINDOW_MODAL);
 	            dialogStage.initOwner(primaryStage);
 	            Scene scene = new Scene(page);
@@ -206,6 +207,7 @@ import view.RootLayoutController;
 	            // Creation du stage.
 	            Stage dialogStageP = new Stage();
 	            dialogStageP.setTitle("Formulaire prospect");
+	            dialogStageP.getIcons().add(new Image("/view/Images/Dragon.png"));//icone de l'appli  
 	            dialogStageP.initModality(Modality.WINDOW_MODAL);
 	            dialogStageP.initOwner(primaryStage);
 	            Scene sceneP = new Scene(pageP);
@@ -233,6 +235,7 @@ import view.RootLayoutController;
 	            // Creation du stage.
 	            Stage dialogStage = new Stage();
 	            dialogStage.setTitle("Formulaire Representant");
+	            dialogStage.getIcons().add(new Image("/view/Images/Dragon.png"));//icone de l'appli  
 	            dialogStage.initModality(Modality.WINDOW_MODAL);
 	            dialogStage.initOwner(primaryStage);
 	            Scene scene = new Scene(page);
